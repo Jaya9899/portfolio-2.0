@@ -1,24 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 380" width="300" height="380">
-  <title>Placeholder frame for a photograph</title>
+  <title>Empty photo frame</title>
 
-  <rect x="10" y="8" width="282" height="364" fill="#E5A50A"/>
-  <rect x="8" y="10" width="282" height="364" fill="#F2E8D5"/>
+  <rect width="300" height="380" fill="#D4D0C8"/>
 
-  <rect x="14" y="16" width="270" height="352" fill="none" stroke="#1A1512" stroke-width="3"/>
-  <rect x="20" y="22" width="258" height="340" fill="none" stroke="#1A1512" stroke-width="1"/>
+  <!-- Sunken bevel: dark on the top and left, light on the bottom and right -->
+  <path d="M0 380 V0 H300 V4 H4 V380 Z" fill="#808080"/>
+  <path d="M300 0 V380 H0 V376 H296 V0 Z" fill="#FFFFFF"/>
+  <path d="M4 376 V4 H296 V8 H8 V376 Z" fill="#404040"/>
+  <path d="M296 4 V376 H4 V372 H292 V4 Z" fill="#DFDFDF"/>
 
-  <rect x="21" y="23" width="256" height="30" fill="#14685A"/>
-  <text x="149" y="45" font-family="Arial Black, Arial, sans-serif" font-size="17"
-        fill="#F2E8D5" text-anchor="middle" letter-spacing="1">STUDIO PORTRAIT</text>
+  <rect x="8" y="8" width="284" height="364" fill="#FFFFFF"/>
 
-  <!-- Bust silhouette -->
-  <g fill="#2E3A87">
-    <circle cx="149" cy="160" r="46"/>
-    <path d="M67 300 a82 78 0 0 1 164 0 Z"/>
-  </g>
-
-  <text x="149" y="330" font-family="Arial, Helvetica, sans-serif" font-size="15"
-        font-weight="bold" fill="#1A1512" text-anchor="middle">REPLACE THIS FILE</text>
-  <text x="149" y="349" font-family="Arial, Helvetica, sans-serif" font-size="12"
-        fill="#A8340A" text-anchor="middle">assets/jaya.jpg</text>
+  <text x="150" y="182" font-family="Tahoma, Verdana, sans-serif" font-size="17"
+        font-weight="bold" fill="#000000" text-anchor="middle">No photo yet</text>
+  <text x="150" y="208" font-family="Tahoma, Verdana, sans-serif" font-size="13"
+        fill="#404040" text-anchor="middle">Save yours as assets/jaya.jpg</text>
 </svg>

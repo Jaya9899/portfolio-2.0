@@ -2,18 +2,16 @@
 
 ## Original work
 
-Every graphic currently in this folder was drawn as SVG for this project.
-No third-party images are used, so nothing here needs attribution.
+Both files in this folder were drawn as SVG for this project. No third-party
+images are used, so nothing here needs attribution.
 
 | File | What it is |
 |---|---|
-| `label-about.svg` | "Filter Kaapi" label — tumbler and davara |
-| `label-projects.svg` | "Rocket" label |
-| `label-skills.svg` | "Dynamo" label — filament bulb |
-| `label-beyond.svg` | "Mayil" label — peacock |
-| `label-contact.svg` | "STD · ISD · PCO" label — telephone handset |
-| `photo-placeholder.svg` | Frame standing in for a photograph |
-| `favicon.svg` | Browser tab icon |
+| `photo-placeholder.svg` | Empty sunken frame standing in for a photograph |
+| `favicon.svg` | Browser tab icon — a small window on a teal desktop |
+
+Everything else on the page — the shortcuts, the window frames, the bevels, the
+taskbar — is plain CSS boxes, not images.
 
 ## If you add an image you did not make
 

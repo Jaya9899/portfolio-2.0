@@ -5,44 +5,45 @@ Science & Engineering, NIT Warangal.
 Built for **CS1303 Full Stack Development, Assignment 1** — HTML5 and CSS3 only.
 No frameworks, no preprocessors, no JavaScript.
 
-Open `index.html` in any browser. There is nothing to install.
+Open `index.html` in any browser. There is nothing to install, and the page makes no
+external network requests at all.
 
 ---
 
 ## Design rationale
 
-The site is built to look like a wall of pasted Indian safety-match labels. Matchbox
-label art is a real printing tradition: a heavy display face, one central motif, hard
-border rules, and colour plates that rarely landed in register. Each section of the
-portfolio is one label, and the hero is the wall — every label is a link into the
-section it advertises. The palette (newsprint, vermillion, bottle green, indigo,
-turmeric) and the deliberate 4px misregistration on the main heading come from that
-tradition rather than from a template. Type reinforces it: Anton for the printed
-banner, and Mukta and Rajdhani — both drawn by Indian Type Foundry for Devanagari
-alongside Latin — for reading and for small caps labels.
+The site is a Windows 2000 desktop. The homepage *is* the desktop: five shortcuts on
+the teal wallpaper, each drawn as a small window, each opening a section. Every section
+below is a window with a title bar showing its file path. The whole visual language
+comes from two custom properties — `--bevel-out` and `--bevel-in` — each a stack of
+four inset shadows that draw the two-tone moulded edge every Windows control had.
+Nothing on the page is an illustration; it is all plain boxes and bevels. The palette is
+the system palette: `#D4D0C8` button grey, `#008080` desktop teal, and the navy title
+bar gradient. Type is Tahoma, which shipped with Windows 2000 and is still on most
+machines, so no font has to be downloaded.
 
 ## Layout technique
 
 Both Grid and Flexbox are used, chosen per job rather than by preference. **Grid**
-handles anything positioned on two axes: the hero collage is six equal columns with
-each label spanning two, so the first row holds three labels and the second is offset
-by one column to stagger them. Flexbox cannot place items across rows and columns like
-that. The project and interest galleries use `repeat(auto-fit, minmax())`, which
-reflows from three columns to one without a media query at all. **Flexbox** handles
-one-dimensional content that only needs to wrap: the navigation bar, the skill chips,
-the factsheet rows and the tech-stack tags.
+handles anything positioned on two axes: the desktop is six equal columns with each
+shortcut spanning two, so the first row holds three and the second starts one column in,
+which centres it. Flexbox cannot place items across rows and columns like that. The
+project and interest galleries use `repeat(auto-fit, minmax())`, which reflows from
+three columns to one with no media query at all. **Flexbox** handles one-dimensional
+content that only needs to sit in a row: the taskbar, every window title bar (path left,
+buttons right), the skill chips, and the factsheet rows.
 
 ## Known limitations
 
-The contact form has no `action` endpoint. No JavaScript or backend is permitted in
-this assignment, so it validates client-side through HTML5 `required` and `type`
-attributes and does nothing on submit; an Express route replaces it in Assignment 2.
-Fonts load from Google Fonts, so offline the page falls back to a local stack and the
-display face changes. Content marked TODO is placeholder. The tilted labels are
-straightened below 480px, because a rotated card either clips or forces a sideways
-scroll on a narrow screen.
+The contact form has no `action` endpoint. No JavaScript or backend is permitted in this
+assignment, so it validates client-side through HTML5 `required` and `type` attributes
+and does nothing on submit; an Express route replaces it in Assignment 2. The window
+buttons and the taskbar clock are decorative — without JavaScript they cannot minimise,
+close, or tell the time, so they carry `aria-hidden` and are skipped by screen readers.
+Tahoma is absent on some Linux machines, where the page falls back to Verdana. Content
+marked TODO is placeholder.
 
-*(The three sections above are ~290 words.)*
+*(The three sections above are ~295 words.)*
 
 ---
 
@@ -51,7 +52,7 @@ scroll on a narrow screen.
 ```
 index.html            the whole page
 style.css             the whole stylesheet, sectioned and commented
-assets/               five matchbox label graphics, a photo frame, a favicon
+assets/               photo placeholder and favicon
 assets/CREDITS.md     attribution, if any third-party image is added
 screenshots/          full-page captures at 1440px, 768px and 390px
 responsive-views.pdf  the three captures side by side — deliverable 3
@@ -60,20 +61,6 @@ README.md             this file
 
 `style.css` opens with a comment block listing every assignment requirement and the
 section number where it is met.
-
-## Validation
-
-Checked on 30 July 2026:
-
-- **W3C Nu HTML validator** — 0 errors, 0 warnings
-- **W3C CSS validator (CSS3 profile)** — 0 errors. The 31 warnings are all the
-  validator's standard "CSS variables are not statically checked" notice, which it
-  emits for every `var()` call.
-- **Contrast** — every text/background pair computed against WCAG AA; the lowest is
-  5.47:1 against a 4.5:1 requirement.
-
-Re-run them at https://validator.w3.org/nu/ and https://jigsaw.w3.org/css-validator/
-by uploading the files after you fill in your content.
 
 ## Requirements checklist
 
@@ -84,19 +71,33 @@ by uploading the files after you fill in your content.
 | Three or more projects | three `<article>` entries |
 | `label`–input association | every field, explicit `for` / `id` |
 | External stylesheet only | no `<style>` tag, no `style=""` attribute |
-| `:root` custom properties | colour, type, spacing, print details |
+| `:root` custom properties | palette, type, spacing, and both bevels |
 | Flexbox and/or Grid | both, justified above |
 | Breakpoints at 768px and 480px | yes |
-| `:hover` and `:focus` states | yes |
-| Transition and animation | tile straighten transition, staggered `paste-up` animation |
+| `:hover` and `:focus` states | shortcut title bar activates; button presses in |
+| Transition and animation | title bar fade and lift; staggered `window-open` |
 | `alt` on every image | yes, descriptive |
 | Single `h1`, logical headings | one `h1`, `h2` per section, `h3` within |
 | WCAG AA contrast | all text pairs ≥ 4.5:1, ratios noted in `style.css` |
 
+## Validation
+
+Checked on 30 July 2026:
+
+- **W3C Nu HTML validator** — 0 errors, 0 warnings
+- **W3C CSS validator (CSS3 profile)** — 0 errors. The warnings are all the validator's
+  standard "CSS variables are not statically checked" notice, which it emits for every
+  `var()` call.
+- **Contrast** — every text/background pair computed against WCAG AA; the lowest is
+  4.77:1 (white on the desktop teal) against a 4.5:1 requirement.
+
+Re-run them at https://validator.w3.org/nu/ and https://jigsaw.w3.org/css-validator/
+by uploading the files after you fill in your content.
+
 ## Still to fill in
 
 Search the project for `TODO` — every placeholder is marked in the HTML and shown in
-rust with a dashed rule on the page, so nothing gets missed.
+dark red on the page, so nothing gets missed.
 
 - [ ] About: two paragraphs, your city, what you are working on
 - [ ] Projects: three titles, blurbs, tech stacks, and real links

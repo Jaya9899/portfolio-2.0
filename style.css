@@ -6,64 +6,80 @@
    -----------------------------
    External stylesheet only ....... this file; index.html has no <style> tag
                                     and no style="" attributes anywhere
-   :root custom properties ........ section 1
-   CSS Grid ....................... .collage__wall (s.6), .project-grid (s.9),
+   :root custom properties ........ section 1 (including the two bevels,
+                                    which are the whole visual language)
+   CSS Grid ....................... .desktop__grid (s.6), .project-grid (s.9),
                                     .about (s.8), .contact (s.11)
-   Flexbox ........................ .site-nav (s.4), .chips (s.10),
-                                    .factsheet__row (s.8), .project__stack (s.9)
-   Breakpoint: tablet <= 768px .... section 14
+   Flexbox ........................ .taskbar (s.4), .window__bar (s.7),
+                                    .chips (s.10), .factsheet__row (s.8)
+   Breakpoint: tablet <= 768px .... section 13
    Breakpoint: mobile <= 480px .... section 14
-   Interactive state (:hover) ..... .tile a:hover (s.6) and others
-   Interactive state (:focus) ..... .tile a:focus-visible (s.6), form fields (s.11)
-   CSS transition ................. .tile a (s.6), .project (s.9), .button (s.11)
-   CSS animation .................. @keyframes paste-up (s.6), staggered per tile
+   Interactive state (:hover) ..... .shortcut a:hover (s.6), .button (s.11)
+   Interactive state (:focus) ..... .shortcut a:focus-visible (s.6),
+                                    form fields (s.11), global ring (s.2)
+   CSS transition ................. shortcut title bar and lift (s.6),
+                                    button press (s.11)
+   CSS animation .................. @keyframes window-open (s.6), staggered
    Reduced motion respected ....... section 15
    Colour contrast ................ every text/background pair is >= 4.5:1,
-                                    ratios noted against the paper in section 1
+                                    ratios noted in section 1
    ========================================================================== */
 
 
 /* ==========================================================================
    1. DESIGN TOKENS
-   Palette taken from old Indian safety-match labels: newsprint paper, four
-   ink plates, black line work. Contrast ratios below are measured against
-   --paper and all clear the WCAG AA threshold of 4.5:1 for body text.
+   The palette is the Windows 2000 system palette. Contrast ratios are
+   measured against the background each colour actually sits on, and all
+   clear the WCAG AA threshold of 4.5:1 for body text.
    ========================================================================== */
 
 :root {
-  /* Paper and ink */
-  --paper:        #F2E8D5;   /* aged newsprint                          */
-  --paper-2:      #E7DAC0;   /* the same paper, one shade in shadow     */
-  --ink:          #1A1512;   /* press black, warmed slightly     15.6:1 */
+  /* System greys */
+  --white:    #FFFFFF;
+  --light:    #DFDFDF;
+  --face:     #D4D0C8;   /* the classic button/window grey             */
+  --shadow:   #808080;
+  --dark:     #0A0A0A;
 
-  /* The four colour plates */
-  --rust:         #A8340A;   /* text-safe vermillion              5.5:1 */
-  --rust-bright:  #C1440E;   /* large fills and blocks only, 4.2:1 —
-                                too light for body text, never used for it */
-  --sea:          #14685A;   /* bottle green                      5.5:1 */
-  --indigo:       #2E3A87;   /* indigo                            8.3:1 */
-  --mustard:      #E5A50A;   /* turmeric — only 1.8:1 on paper, so it is
-                                used for fills and the misregistered plate
-                                there. As text it appears on --ink only,
-                                where it measures 8.4:1                    */
+  /* Desktop and title bars */
+  --desktop:  #008080;   /* white text on this measures         4.8:1  */
+  --title-1:  #0A246A;   /* active title bar, left end         12.9:1  */
+  --title-2:  #3A6EA5;   /* active title bar, right end         5.3:1  */
+  --title-off:#6E6E6E;   /* inactive title bar                  5.1:1  */
 
-  /* Type */
-  --font-display: 'Anton', 'Arial Narrow', Impact, sans-serif;
-  --font-body:    'Mukta', 'Segoe UI', system-ui, sans-serif;
-  --font-util:    'Rajdhani', 'Segoe UI', system-ui, sans-serif;
+  /* Text */
+  --ink:      #000000;   /* on --face 15.9:1, on white         21.0:1  */
+  --link:     #000080;   /* on white 16.0:1, on --face         10.4:1  */
+  --alert:    #8B0000;   /* TODO markers, on white             10.0:1  */
 
-  /* Spacing scale */
+  /* The two bevels. Four inset shadows each: an outer highlight and an
+     outer shadow, then an inner highlight and an inner shadow. That
+     two-tone edge is what made every Windows control look moulded. */
+  --bevel-out:
+    inset  1px  1px 0 var(--white),
+    inset -1px -1px 0 var(--dark),
+    inset  2px  2px 0 var(--light),
+    inset -2px -2px 0 var(--shadow);
+  --bevel-in:
+    inset  1px  1px 0 var(--shadow),
+    inset -1px -1px 0 var(--white),
+    inset  2px  2px 0 var(--dark),
+    inset -2px -2px 0 var(--light);
+
+  /* Type. Tahoma shipped with Windows 2000 and is still on most machines,
+     so nothing has to be downloaded for this page to look right. */
+  --font: Tahoma, "MS Sans Serif", Verdana, Geneva, sans-serif;
+  --font-mono: "Courier New", Courier, monospace;
+
+  /* Spacing */
   --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 1.5rem;
   --space-4: 2.5rem;
   --space-5: 4rem;
 
-  /* Print details */
-  --rule:     3px solid var(--ink);
-  --hairline: 1px solid var(--ink);
-  --page:     1100px;
-  --speed:    0.25s;
+  --page: 1000px;
+  --speed: 0.18s;
 }
 
 
@@ -78,40 +94,25 @@
 }
 
 html {
-  scroll-behavior: smooth;   /* the collage is all jump links, so ease them */
+  scroll-behavior: smooth;   /* every shortcut is a jump link, so ease them */
 }
 
 body {
-  font-family: var(--font-body);
-  font-size: 1.0625rem;
-  line-height: 1.65;
+  font-family: var(--font);
+  font-size: 0.9375rem;      /* 15px — bigger than the 11px the real UI used */
+  line-height: 1.6;
   color: var(--ink);
-  background-color: var(--paper);
-
-  /* Newsprint grain, built from gradients so there is no texture image to ship.
-     Fine horizontal lines for the paper stock, two soft ink blooms for age. */
-  background-image:
-    repeating-linear-gradient(0deg, rgba(26, 21, 18, 0.035) 0 1px, transparent 1px 3px),
-    radial-gradient(circle at 18% 22%, rgba(168, 52, 10, 0.07), transparent 55%),
-    radial-gradient(circle at 82% 78%, rgba(20, 104, 90, 0.07), transparent 55%);
+  background: var(--desktop);
+  padding-bottom: 60px;      /* clear the fixed taskbar */
 }
 
 h1, h2, h3 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 1.15;
 }
 
 a {
-  color: var(--rust);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
-}
-
-a:hover {
-  color: var(--sea);
+  color: var(--link);
 }
 
 img {
@@ -120,33 +121,39 @@ img {
   height: auto;
 }
 
-/* One visible focus ring for the whole page, so keyboard users never
-   lose their place. */
+ul {
+  list-style: none;
+}
+
+/* One focus ring for the whole page. Dotted, the way focus looked then. */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 3px solid var(--indigo);
-  outline-offset: 3px;
+  outline: 2px dotted var(--ink);
+  outline-offset: 2px;
+}
+
+.taskbar a:focus-visible,
+.desktop a:focus-visible {
+  outline-color: var(--white);
 }
 
 
 /* ==========================================================================
    3. SKIP LINK
-   Hidden until focused, so a keyboard user can jump past the nav.
    ========================================================================== */
 
 .skip-link {
   position: absolute;
   top: -100px;
   left: var(--space-2);
-  z-index: 20;
+  z-index: 200;
   padding: var(--space-1) var(--space-2);
-  background: var(--ink);
-  color: var(--paper);
-  font-family: var(--font-util);
-  font-weight: 600;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+  color: var(--ink);
   text-decoration: none;
   transition: top var(--speed) ease;
 }
@@ -157,228 +164,290 @@ textarea:focus-visible {
 
 
 /* ==========================================================================
-   4. HEADER AND MAIN NAV                                    [FLEXBOX]
-   A nav bar is a single row of items, so this is one-dimensional
-   content and Flexbox is the right tool.
+   4. TASKBAR                                                   [FLEXBOX]
+   One row of controls pinned to the bottom edge. A row is one-dimensional
+   content, so this is Flexbox rather than Grid.
    ========================================================================== */
 
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
-  background: var(--ink);
-  border-bottom: 4px solid var(--mustard);
+  gap: var(--space-1);
+  padding: 4px 6px;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+  overflow-x: auto;          /* narrow screens scroll rather than wrap */
 }
 
-.site-header__mark {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  color: var(--paper);
-  letter-spacing: 0.08em;
-  border: 2px solid var(--mustard);
-  padding: 0 var(--space-1);
-}
-
-.site-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1) var(--space-3);
-  list-style: none;
-}
-
-.site-nav a {
-  font-family: var(--font-util);
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+.taskbar__start {
+  flex: 0 0 auto;
+  padding: 4px 14px;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+  font-size: 0.8125rem;
+  font-weight: bold;
+  color: var(--ink);
   text-decoration: none;
-  color: var(--paper);
-  padding-bottom: 2px;
-  border-bottom: 2px solid transparent;
-  transition: color var(--speed) ease, border-color var(--speed) ease;
 }
 
-.site-nav a:hover,
-.site-nav a:focus-visible {
-  color: var(--mustard);
-  border-bottom-color: var(--mustard);
+.taskbar__start:active {
+  box-shadow: var(--bevel-in);
+}
+
+.taskbar__list {
+  display: flex;
+  gap: 4px;
+}
+
+.taskbar__list a {
+  display: block;
+  white-space: nowrap;
+  padding: 4px 12px;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+  font-size: 0.8125rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.taskbar__list a:hover {
+  background: var(--light);
+}
+
+.taskbar__list a:active {
+  box-shadow: var(--bevel-in);
+}
+
+.taskbar__clock {
+  flex: 0 0 auto;
+  margin-left: auto;
+  padding: 4px 10px;
+  box-shadow: var(--bevel-in);
+  font-size: 0.8125rem;
+  white-space: nowrap;
 }
 
 
 /* ==========================================================================
-   5. HERO
+   5. THE DESKTOP (introduction)
    ========================================================================== */
 
-.hero {
+.desktop {
   max-width: var(--page);
   margin: 0 auto;
   padding: var(--space-5) var(--space-3) var(--space-4);
   text-align: center;
+  color: var(--white);
 }
 
-.hero__eyebrow,
-.section-eyebrow {
-  font-family: var(--font-util);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.24em;
+.desktop__eyebrow {
+  font-size: 0.8125rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--rust);
   margin-bottom: var(--space-2);
 }
 
 h1 {
-  display: inline-block;
-  font-size: clamp(2.75rem, 11vw, 6rem);
-  letter-spacing: 0.02em;
-  padding: var(--space-2) var(--space-3);
-  border: 5px solid var(--ink);
-  background: var(--paper);
-
-  /* Off-register printing: one colour plate landed 4px out of alignment.
-     This is the whole visual idea of the site in a single line. */
-  text-shadow: 4px 4px 0 var(--mustard);
+  font-size: clamp(2.25rem, 8vw, 4rem);
+  letter-spacing: -0.02em;
+  /* The soft drop shadow desktop icon labels always had */
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
 }
 
-.hero__tagline {
-  max-width: 34ch;
-  margin: var(--space-3) auto var(--space-5);
-  font-size: 1.15rem;
+.desktop__tagline {
+  margin: var(--space-2) auto var(--space-5);
+  max-width: 42ch;
+}
+
+.statusbar {
+  margin-top: var(--space-3);
+  padding: 3px 10px;
+  background: var(--face);
+  box-shadow: var(--bevel-in);
   color: var(--ink);
-}
-
-/* The boilerplate strip that every real matchbox carries round its edge. */
-.boilerplate {
-  margin-top: var(--space-5);
-  padding: var(--space-1) 0;
-  border-top: var(--hairline);
-  border-bottom: var(--hairline);
-  font-family: var(--font-util);
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--sea);
+  font-size: 0.75rem;
+  text-align: left;
 }
 
 
 /* ==========================================================================
-   6. THE COLLAGE                                               [CSS GRID]
-   Six equal columns. Each label spans two of them, so the first row holds
-   three labels and the second row is nudged over by one column, which makes
-   the stagger. Flexbox cannot place items on two axes like this — that is
-   why this part is Grid and the nav above is Flex.
+   6. SHORTCUTS                                                 [CSS GRID]
+   Six equal columns. Each shortcut spans two of them, so the first row
+   holds three and the second row starts one column in, which centres it.
+   Flexbox cannot place items across rows and columns like that — that is
+   why the shortcuts are Grid and the taskbar above is Flex.
    ========================================================================== */
 
-.collage__wall {
+.desktop__grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: var(--space-4) var(--space-3);
-  list-style: none;
+  gap: var(--space-3);
 }
 
-.tile--1 { grid-column: 1 / span 2; --tilt: -3deg;   animation-delay: 0.05s; }
-.tile--2 { grid-column: 3 / span 2; --tilt: 2deg;    animation-delay: 0.15s; }
-.tile--3 { grid-column: 5 / span 2; --tilt: -1.5deg; animation-delay: 0.25s; }
-.tile--4 { grid-column: 2 / span 2; --tilt: 2.5deg;  animation-delay: 0.35s; }
-.tile--5 { grid-column: 4 / span 2; --tilt: -2deg;   animation-delay: 0.45s; }
+.shortcut--1 { grid-column: 1 / span 2; animation-delay: 0.05s; }
+.shortcut--2 { grid-column: 3 / span 2; animation-delay: 0.13s; }
+.shortcut--3 { grid-column: 5 / span 2; animation-delay: 0.21s; }
+.shortcut--4 { grid-column: 2 / span 2; animation-delay: 0.29s; }
+.shortcut--5 { grid-column: 4 / span 2; animation-delay: 0.37s; }
 
-/* Entrance lives on the <li> and the tilt lives on the <a>, so the two
-   transforms never fight over the same element. */
-.tile {
+/* The windows open one after another when the page loads. */
+.shortcut {
   opacity: 0;
-  animation: paste-up 0.55s ease-out forwards;
+  animation: window-open 0.35s ease-out forwards;
 }
 
-@keyframes paste-up {
-  from { opacity: 0; transform: translateY(22px); }
-  to   { opacity: 1; transform: translateY(0); }
+@keyframes window-open {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-.tile a {
+.shortcut a {
   display: block;
+  padding: 3px;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
   text-decoration: none;
-  transform: rotate(var(--tilt));
+  color: var(--ink);
   transition: transform var(--speed) ease;
 }
 
-/* The shadow goes on the image, not on the link. On the link it would fall
-   behind the caption text as well and print it twice. */
-.tile img {
-  filter: drop-shadow(4px 5px 0 rgba(26, 21, 18, 0.28));
-  transition: filter var(--speed) ease;
+.shortcut__bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-1);
+  padding: 3px 5px;
+  background: var(--title-off);
+  color: var(--white);
+  font-size: 0.75rem;
+  font-weight: bold;
 }
 
-/* Hovering or tabbing to a label straightens it and lifts it off the wall,
-   like peeling up a corner of something pasted down. */
-.tile a:hover,
-.tile a:focus-visible {
-  transform: rotate(0deg) translateY(-10px) scale(1.03);
+/* The active-window blue sits on top of the inactive grey and fades in.
+   Two backgrounds rather than one because a gradient cannot be animated. */
+.shortcut__bar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, var(--title-1), var(--title-2));
+  opacity: 0;
+  transition: opacity var(--speed) ease;
 }
 
-.tile a:hover img,
-.tile a:focus-visible img {
-  filter: drop-shadow(8px 10px 0 rgba(26, 21, 18, 0.35));
+.shortcut__file,
+.shortcut__buttons {
+  position: relative;   /* keep the text above the fading blue */
 }
 
-.tile__caption {
+.shortcut__file {
+  font-family: var(--font-mono);
+}
+
+.shortcut__buttons {
+  letter-spacing: 0.15em;
+}
+
+.shortcut__body {
   display: block;
-  margin-top: var(--space-2);
-  font-family: var(--font-util);
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink);
+  padding: var(--space-3) var(--space-1);
+  background: var(--white);
+  box-shadow: var(--bevel-in);
+  font-size: 0.9375rem;
+  text-align: center;
+}
+
+/* Hovering or tabbing to a shortcut brings its window to the front:
+   the title bar lights up from inactive grey to active blue. */
+.shortcut a:hover,
+.shortcut a:focus-visible {
+  transform: translateY(-3px);
+}
+
+.shortcut a:hover .shortcut__bar::before,
+.shortcut a:focus-visible .shortcut__bar::before {
+  opacity: 1;
 }
 
 
 /* ==========================================================================
-   7. SHARED SECTION FURNITURE
+   7. WINDOWS                                                   [FLEXBOX]
+   Every section below the desktop is a window: a title bar with the file
+   path on the left and the buttons on the right, then a sunken white body.
    ========================================================================== */
 
-main > section {
+.window {
   max-width: var(--page);
-  margin: 0 auto;
-  padding: var(--space-5) var(--space-3);
+  margin: 0 auto var(--space-4);
+  padding: 3px;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
 }
 
-main > section + section {
-  border-top: var(--rule);
+.window__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: 4px 6px;
+  background: linear-gradient(90deg, var(--title-1), var(--title-2));
+  color: var(--white);
+  font-size: 0.8125rem;
+  font-weight: bold;
+}
+
+.window__path {
+  font-family: var(--font-mono);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.window__buttons {
+  letter-spacing: 0.15em;
+  flex: 0 0 auto;
+}
+
+.window__body {
+  padding: var(--space-4) var(--space-3);
+  background: var(--white);
+  box-shadow: var(--bevel-in);
 }
 
 h2 {
-  font-size: clamp(1.9rem, 5.5vw, 2.9rem);
-  margin-bottom: var(--space-2);
-  text-shadow: 3px 3px 0 var(--paper-2);
-}
-
-h3 {
-  font-size: 1.25rem;
-  letter-spacing: 0.04em;
+  font-size: 1.75rem;
   margin-bottom: var(--space-1);
 }
 
-.section-intro {
-  max-width: 55ch;
+h3 {
+  font-size: 1.0625rem;
+  margin-bottom: var(--space-1);
+}
+
+.lede {
   margin-bottom: var(--space-4);
   color: var(--ink);
 }
 
-/* Every unfinished bit of copy is marked, so nothing gets left behind
-   by accident. Delete the class once the real text is in. */
+/* Every unfinished bit of copy is marked, so nothing gets left behind.
+   Delete the class once the real text is in. */
 .todo {
-  color: var(--rust);
-  border-left: 4px dashed var(--rust);
-  padding-left: var(--space-2);
+  color: var(--alert);
   font-style: italic;
+}
+
+p.todo,
+h3.todo {
+  border-left: 4px solid var(--alert);
+  padding-left: var(--space-2);
 }
 
 
@@ -394,9 +463,9 @@ h3 {
 }
 
 .about__photo {
-  border: var(--rule);
-  background: var(--paper);
-  box-shadow: 8px 8px 0 var(--sea);
+  padding: 3px;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
 }
 
 .about__photo img {
@@ -404,13 +473,9 @@ h3 {
 }
 
 .about__photo figcaption {
-  padding: var(--space-1) var(--space-2);
-  border-top: var(--rule);
-  font-family: var(--font-util);
-  font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  padding: 4px;
+  font-size: 0.8125rem;
+  font-weight: bold;
   text-align: center;
 }
 
@@ -420,34 +485,26 @@ h3 {
 
 .factsheet {
   margin-top: var(--space-3);
-  border-top: var(--hairline);
 }
 
-/* Each row is one line of label + value, so Flexbox. */
+/* Each row is one line of label plus value, so Flexbox. */
 .factsheet__row {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
   padding: var(--space-1) 0;
-  border-bottom: var(--hairline);
+  border-bottom: 1px solid var(--light);
 }
 
 .factsheet dt {
   flex: 0 0 8rem;
-  font-family: var(--font-util);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  color: var(--sea);
-  padding-top: 0.2rem;
+  font-weight: bold;
 }
 
 .factsheet dd {
   flex: 1 1 12rem;
 }
 
-/* The factsheet values are short, so drop the block treatment there. */
 .factsheet dd.todo {
   border-left: none;
   padding-left: 0;
@@ -462,106 +519,76 @@ h3 {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: var(--space-4) var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-3);
 }
 
-.project {
+.project,
+.panel {
   display: flex;
   flex-direction: column;
   padding: var(--space-3);
-  background: var(--paper);
-  border: var(--rule);
-  box-shadow: 7px 7px 0 var(--rust-bright);
-  transition: transform var(--speed) ease, box-shadow var(--speed) ease;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
 }
 
-/* Rotate the offset colour through the plates so the row reads as printed,
-   not as three copies of one card. */
-.project:nth-child(2) { box-shadow: 7px 7px 0 var(--sea); }
-.project:nth-child(3) { box-shadow: 7px 7px 0 var(--indigo); }
-
-.project:hover {
-  transform: translate(-4px, -4px);
-  box-shadow: 11px 11px 0 var(--rust-bright);
-}
-
-.project:nth-child(2):hover { box-shadow: 11px 11px 0 var(--sea); }
-.project:nth-child(3):hover { box-shadow: 11px 11px 0 var(--indigo); }
-
-.project__blurb {
+.project p,
+.panel p {
   margin-bottom: var(--space-2);
 }
 
-.project__stack {
+.stack {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-1);
-  list-style: none;
+  gap: 4px;
   margin-top: auto;
-  padding-top: var(--space-2);
+  padding-top: var(--space-1);
 }
 
-.project__stack li {
-  font-family: var(--font-util);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 0.15rem 0.55rem;
-  background: var(--ink);
-  color: var(--paper);
+.stack li {
+  padding: 1px 7px;
+  background: var(--white);
+  box-shadow: var(--bevel-in);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
 }
 
 .project__links {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-3);
+  gap: var(--space-2);
   margin-top: var(--space-2);
-  padding-top: var(--space-2);
-  border-top: var(--hairline);
-  font-family: var(--font-util);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 0.85rem;
+  margin-bottom: 0;
+  font-size: 0.875rem;
 }
 
 
 /* ==========================================================================
    10. SKILLS                                                    [FLEXBOX]
-   A bag of chips that just needs to wrap — one-dimensional, so Flexbox.
+   A bag of chips that only needs to wrap — one-dimensional, so Flexbox.
    ========================================================================== */
 
 #skills h3 {
   margin-top: var(--space-3);
-  color: var(--sea);
 }
 
 .chips {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-1);
-  list-style: none;
   margin-bottom: var(--space-2);
 }
 
 .chips li {
-  font-family: var(--font-util);
-  font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: 0.08em;
-  padding: 0.2rem 0.8rem;
-  border: 2px solid var(--ink);
-  background: var(--paper);
-  box-shadow: 3px 3px 0 var(--mustard);
+  padding: 3px 12px;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+  font-size: 0.875rem;
 }
 
 .chips li.todo {
-  border-style: dashed;
-  border-left-width: 2px;
-  padding-left: 0.8rem;
-  box-shadow: none;
+  background: var(--white);
+  box-shadow: var(--bevel-in);
 }
 
 
@@ -571,20 +598,9 @@ h3 {
 
 .beyond-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: var(--space-3);
 }
-
-.beyond-card {
-  padding: var(--space-3);
-  border: var(--rule);
-  border-left-width: 10px;
-  border-left-color: var(--sea);
-  background: var(--paper);
-}
-
-.beyond-card:nth-child(2) { border-left-color: var(--mustard); }
-.beyond-card:nth-child(3) { border-left-color: var(--indigo); }
 
 .contact {
   display: grid;
@@ -594,34 +610,28 @@ h3 {
 }
 
 .contact__form fieldset {
-  border: var(--rule);
+  border: none;
   padding: var(--space-3);
-  background: var(--paper);
+  background: var(--face);
+  box-shadow: var(--bevel-out);
 }
 
 .contact__form legend {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  padding: 0 var(--space-1);
-  background: var(--ink);
-  color: var(--paper);
+  padding: 2px 8px;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+  font-size: 0.8125rem;
+  font-weight: bold;
 }
 
 .field {
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-2);
 }
 
 .field label {
   display: block;
-  margin-bottom: 0.3rem;
-  font-family: var(--font-util);
-  font-weight: 600;
-  font-size: 0.85rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--sea);
+  margin-bottom: 3px;
+  font-size: 0.875rem;
 }
 
 .field input[type="text"],
@@ -629,23 +639,17 @@ h3 {
 .field select,
 .field textarea {
   width: 100%;
-  font-family: var(--font-body);
-  font-size: 1rem;
+  font-family: var(--font);
+  font-size: 0.9375rem;
   color: var(--ink);
-  background: var(--paper-2);
-  border: 2px solid var(--ink);
-  padding: 0.55rem 0.7rem;
-  transition: background var(--speed) ease;
+  background: var(--white);
+  border: none;
+  box-shadow: var(--bevel-in);
+  padding: 5px 7px;
 }
 
 .field textarea {
   resize: vertical;
-}
-
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
-  background: var(--paper);
 }
 
 /* The checkbox sits beside its label rather than above it. */
@@ -657,71 +661,52 @@ h3 {
 
 .field--check label {
   margin-bottom: 0;
-  text-transform: none;
-  letter-spacing: 0.02em;
-  font-size: 0.95rem;
-  color: var(--ink);
 }
 
 .field--check input {
-  width: 1.1rem;
-  height: 1.1rem;
-  accent-color: var(--rust);
+  width: 1rem;
+  height: 1rem;
 }
 
 .button {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--paper);
-  background: var(--rust);
-  border: 3px solid var(--ink);
-  padding: 0.5rem var(--space-3);
+  font-family: var(--font);
+  font-size: 0.9375rem;
+  font-weight: bold;
+  color: var(--ink);
+  background: var(--face);
+  border: none;
+  box-shadow: var(--bevel-out);
+  padding: 6px 22px;
   cursor: pointer;
-  box-shadow: 5px 5px 0 var(--ink);
-  transition: transform var(--speed) ease, box-shadow var(--speed) ease;
+  transition: background var(--speed) ease;
 }
 
-.button:hover,
-.button:focus-visible {
-  transform: translate(-2px, -2px);
-  box-shadow: 8px 8px 0 var(--ink);
+.button:hover {
+  background: var(--light);
 }
 
+/* Pressing it flips the bevel, so the button really does go in. */
 .button:active {
-  transform: translate(3px, 3px);
-  box-shadow: 1px 1px 0 var(--ink);
+  box-shadow: var(--bevel-in);
+  padding: 7px 21px 5px 23px;
 }
 
 .form-note {
   margin-top: var(--space-2);
-  font-size: 0.85rem;
-  color: var(--sea);
-}
-
-.contact__list {
-  list-style: none;
-  margin-top: var(--space-2);
+  font-size: 0.8125rem;
 }
 
 .contact__list li {
   padding: var(--space-1) 0;
-  border-bottom: var(--hairline);
+  border-bottom: 1px solid var(--light);
 }
 
 .contact__key {
   display: inline-block;
-  min-width: 6rem;
-  font-family: var(--font-util);
-  font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--sea);
+  min-width: 5.5rem;
+  font-weight: bold;
 }
 
-/* Inline links do not want the dashed block treatment. */
 .contact__list a.todo {
   border-left: none;
   padding-left: 0;
@@ -730,60 +715,59 @@ h3 {
 
 /* ==========================================================================
    12. FOOTER
+   Styled as the status bar along the bottom of a window.
    ========================================================================== */
 
 .site-footer {
-  background: var(--ink);
-  color: var(--paper);
-  text-align: center;
-  padding: var(--space-4) var(--space-3);
-  border-top: 6px solid var(--mustard);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: var(--page);
+  margin: 0 auto var(--space-4);
+  padding: 3px;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+  font-size: 0.8125rem;
 }
 
 .site-footer p {
-  margin-bottom: var(--space-1);
-  font-size: 0.9rem;
+  flex: 1 1 auto;
+  padding: 3px 8px;
+  box-shadow: var(--bevel-in);
 }
 
-.site-footer__rule {
-  font-family: var(--font-util);
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--mustard);
-}
-
-.site-footer a {
-  color: var(--mustard);
-}
-
-.site-footer a:hover {
-  color: var(--paper);
+.site-footer p:last-child {
+  flex: 0 0 auto;
 }
 
 
 /* ==========================================================================
    13. TABLET — 768px and below
-   Three labels across is too tight here, so the wall becomes two columns
+   Three shortcuts across is too tight, so the desktop becomes two columns
    and the side-by-side sections stack.
    ========================================================================== */
 
 @media (max-width: 768px) {
 
-  .collage__wall {
+  .desktop__grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-3);
+    gap: var(--space-2);
   }
 
-  /* Let the labels flow in order instead of holding fixed columns. */
-  .tile--1, .tile--2, .tile--3, .tile--4, .tile--5 {
+  /* Let the shortcuts flow in order instead of holding fixed columns. */
+  .shortcut--1, .shortcut--2, .shortcut--3,
+  .shortcut--4, .shortcut--5 {
     grid-column: auto;
   }
 
-  /* The fifth label has no partner on its row, so give it the full width. */
-  .tile--5 {
+  /* The fifth has no partner on its row, so centre it across both columns.
+     The width: 100% matters — auto side margins make a grid item shrink to
+     fit its text instead of filling its track, and max-width alone cannot
+     push it back out again. */
+  .shortcut--5 {
     grid-column: 1 / -1;
-    max-width: 320px;
+    width: 100%;
+    max-width: 300px;
     margin: 0 auto;
   }
 
@@ -796,75 +780,66 @@ h3 {
     max-width: 300px;
   }
 
-  .hero {
+  .desktop {
     padding-top: var(--space-4);
   }
 
-  main > section {
-    padding: var(--space-4) var(--space-3);
+  .window__body {
+    padding: var(--space-3) var(--space-2);
   }
 }
 
 
 /* ==========================================================================
    14. MOBILE — 480px and below
-   One label per row, and the tilt comes off so nothing runs past the edge
-   of a narrow screen.
+   One shortcut per row, and the windows lose their outer margin so they
+   use the full width of a narrow screen.
    ========================================================================== */
 
 @media (max-width: 480px) {
 
-  body {
-    font-size: 1rem;
+  .desktop {
+    padding: var(--space-4) var(--space-2) var(--space-3);
   }
 
-  .site-header {
-    justify-content: center;
-    padding: var(--space-2);
-  }
-
-  .site-nav {
-    justify-content: center;
-    gap: var(--space-1) var(--space-2);
-  }
-
-  .collage__wall {
+  .desktop__grid {
     grid-template-columns: 1fr;
   }
 
-  .tile--5 {
+  .shortcut--5 {
     max-width: none;
   }
 
-  /* Straighten every label. At this width a tilted card would either clip
-     or force a sideways scroll. */
-  .tile a {
-    transform: rotate(0deg);
+  .shortcut__body {
+    padding: var(--space-2) var(--space-1);
   }
 
-  .tile a:hover,
-  .tile a:focus-visible {
-    transform: translateY(-6px) scale(1.02);
+  .window {
+    margin-left: var(--space-1);
+    margin-right: var(--space-1);
   }
 
-  h1 {
-    padding: var(--space-1) var(--space-2);
-    border-width: 4px;
-    text-shadow: 3px 3px 0 var(--mustard);
+  .window__body {
+    padding: var(--space-3) var(--space-2);
   }
 
   .factsheet dt {
     flex-basis: 100%;
   }
 
-  .contact__form fieldset,
-  .beyond-card,
-  .project {
-    padding: var(--space-2);
+  .site-footer {
+    margin-left: var(--space-1);
+    margin-right: var(--space-1);
   }
 
-  main > section {
-    padding: var(--space-4) var(--space-2);
+  .site-footer p {
+    flex: 1 1 100%;
+  }
+
+  /* The taskbar keeps to one row and scrolls sideways instead of growing
+     tall, so it never eats the screen. */
+  .taskbar__clock {
+    display: none;
   }
 }
 
@@ -889,9 +864,9 @@ h3 {
     transition-duration: 0.01ms !important;
   }
 
-  /* The labels are hidden until their entrance animation runs, so make
+  /* The shortcuts are hidden until their opening animation runs, so make
      sure they are visible when that animation is switched off. */
-  .tile {
+  .shortcut {
     opacity: 1;
   }
 }
