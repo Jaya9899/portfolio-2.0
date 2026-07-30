@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Jayalakshmi Venkatesan, third year Computer Science student at NIT Warangal.">
+  <title>Jaya's World — Jayalakshmi Venkatesan</title>
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <!-- Type: Anton for the printed banner, Mukta for reading, Rajdhani for small caps labels.
+       Mukta and Rajdhani are both from Indian Type Foundry, drawn for Devanagari alongside Latin. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Mukta:wght@400;600;800&amp;family=Rajdhani:wght@500;600;700&amp;display=swap">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <p class="site-header__mark">JW</p>
+    <nav aria-label="Main">
+      <ul class="site-nav">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#beyond">Beyond Code</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ 1. INTRODUCTION ============ -->
+    <section id="intro" class="hero" aria-labelledby="intro-heading">
+      <p class="hero__eyebrow">Third Year &middot; Computer Science &middot; NIT Warangal</p>
+      <h1 id="intro-heading">Jaya's World</h1>
+      <p class="hero__tagline">
+        A wall of labels, each one a way in. Pick whichever looks interesting.
+      </p>
+
+      <!-- The collage. Every tile is a matchbox label linking to a section below. -->
+      <nav class="collage" aria-label="Explore this site">
+        <ul class="collage__wall">
+          <li class="tile tile--1">
+            <a href="#about">
+              <img src="assets/label-about.svg" width="300" height="200"
+                   alt="Matchbox label reading Filter Kaapi, showing a steel tumbler resting in its davara.">
+              <span class="tile__caption">Who I am</span>
+            </a>
+          </li>
+          <li class="tile tile--2">
+            <a href="#projects">
+              <img src="assets/label-projects.svg" width="300" height="200"
+                   alt="Matchbox label reading Rocket, showing a finned rocket climbing on a plume of flame.">
+              <span class="tile__caption">What I've built</span>
+            </a>
+          </li>
+          <li class="tile tile--3">
+            <a href="#skills">
+              <img src="assets/label-skills.svg" width="300" height="200"
+                   alt="Matchbox label reading Dynamo, showing a lit filament bulb throwing rays of light.">
+              <span class="tile__caption">What I use</span>
+            </a>
+          </li>
+          <li class="tile tile--4">
+            <a href="#beyond">
+              <img src="assets/label-beyond.svg" width="300" height="200"
+                   alt="Matchbox label reading Mayil, showing a peacock with its tail fanned open.">
+              <span class="tile__caption">Off the clock</span>
+            </a>
+          </li>
+          <li class="tile tile--5">
+            <a href="#contact">
+              <img src="assets/label-contact.svg" width="300" height="200"
+                   alt="Matchbox label reading STD ISD PCO, showing a rotary telephone with a numbered dial.">
+              <span class="tile__caption">Say hello</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <p class="boilerplate">Safety Matches &middot; Made in Warangal &middot; Contents 5 Labels &middot; Keep Away from Deadlines</p>
+    </section>
+
+    <!-- ============ 2. ABOUT ============ -->
+    <section id="about" aria-labelledby="about-heading">
+      <p class="section-eyebrow">Label One</p>
+      <h2 id="about-heading">About Me</h2>
+
+      <div class="about">
+        <figure class="about__photo">
+          <img src="assets/photo-placeholder.svg" width="300" height="380"
+               alt="Placeholder frame where a photograph of Jayalakshmi Venkatesan will go.">
+          <figcaption>Jayalakshmi Venkatesan</figcaption>
+        </figure>
+
+        <div class="about__text">
+          <p class="todo">
+            TODO — Write two or three sentences about who you are. Where you grew up, what
+            pulled you into computer science, what you are working on right now.
+          </p>
+          <p class="todo">
+            TODO — Write one more paragraph. What are you curious about at the moment?
+            What kind of problem do you enjoy sitting with?
+          </p>
+
+          <dl class="factsheet">
+            <div class="factsheet__row">
+              <dt>Studying</dt>
+              <dd>B.Tech Computer Science &amp; Engineering</dd>
+            </div>
+            <div class="factsheet__row">
+              <dt>Institute</dt>
+              <dd>National Institute of Technology, Warangal</dd>
+            </div>
+            <div class="factsheet__row">
+              <dt>Year</dt>
+              <dd>Third</dd>
+            </div>
+            <div class="factsheet__row">
+              <dt>Based in</dt>
+              <dd class="todo">TODO — your city</dd>
+            </div>
+            <div class="factsheet__row">
+              <dt>Currently</dt>
+              <dd class="todo">TODO — what you are learning or building</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. PROJECTS ============ -->
+    <section id="projects" aria-labelledby="projects-heading">
+      <p class="section-eyebrow">Label Two</p>
+      <h2 id="projects-heading">Projects</h2>
+      <p class="section-intro">Things I built, broke, and mostly fixed.</p>
+
+      <div class="project-grid">
+
+        <article class="project">
+          <h3 class="project__title todo">TODO — Project One</h3>
+          <p class="project__blurb todo">
+            TODO — One or two sentences. What does it do, and why did you make it?
+          </p>
+          <ul class="project__stack">
+            <li>TODO</li>
+            <li>TODO</li>
+            <li>TODO</li>
+          </ul>
+          <p class="project__links">
+            <a href="#projects">Source code</a>
+            <a href="#projects">Live demo</a>
+          </p>
+        </article>
+
+        <article class="project">
+          <h3 class="project__title todo">TODO — Project Two</h3>
+          <p class="project__blurb todo">
+            TODO — One or two sentences. What does it do, and why did you make it?
+          </p>
+          <ul class="project__stack">
+            <li>TODO</li>
+            <li>TODO</li>
+            <li>TODO</li>
+          </ul>
+          <p class="project__links">
+            <a href="#projects">Source code</a>
+            <a href="#projects">Live demo</a>
+          </p>
+        </article>
+
+        <article class="project">
+          <h3 class="project__title todo">TODO — Project Three</h3>
+          <p class="project__blurb todo">
+            TODO — One or two sentences. What does it do, and why did you make it?
+          </p>
+          <ul class="project__stack">
+            <li>TODO</li>
+            <li>TODO</li>
+            <li>TODO</li>
+          </ul>
+          <p class="project__links">
+            <a href="#projects">Source code</a>
+            <a href="#projects">Live demo</a>
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============ 4. SKILLS ============ -->
+    <section id="skills" aria-labelledby="skills-heading">
+      <p class="section-eyebrow">Label Three</p>
+      <h2 id="skills-heading">Skills</h2>
+      <p class="section-intro">Replace these chips with what you actually use. Delete the rest.</p>
+
+      <h3>Languages</h3>
+      <ul class="chips">
+        <li>C</li>
+        <li>C++</li>
+        <li>Python</li>
+        <li>JavaScript</li>
+        <li class="todo">TODO</li>
+      </ul>
+
+      <h3>Web</h3>
+      <ul class="chips">
+        <li>HTML5</li>
+        <li>CSS3</li>
+        <li class="todo">TODO</li>
+        <li class="todo">TODO</li>
+      </ul>
+
+      <h3>Tools</h3>
+      <ul class="chips">
+        <li>Git</li>
+        <li>VS Code</li>
+        <li>Linux</li>
+        <li class="todo">TODO</li>
+      </ul>
+    </section>
+
+    <!-- ============ 5. BEYOND CODE ============ -->
+    <section id="beyond" aria-labelledby="beyond-heading">
+      <p class="section-eyebrow">Label Four</p>
+      <h2 id="beyond-heading">Beyond Code</h2>
+      <p class="section-intro">The parts that do not compile.</p>
+
+      <div class="beyond-grid">
+        <article class="beyond-card">
+          <h3 class="todo">TODO — An interest</h3>
+          <p class="todo">TODO — A sentence or two. Music, reading, sport, art, cooking, anything.</p>
+        </article>
+        <article class="beyond-card">
+          <h3 class="todo">TODO — Another one</h3>
+          <p class="todo">TODO — A sentence or two.</p>
+        </article>
+        <article class="beyond-card">
+          <h3 class="todo">TODO — One more</h3>
+          <p class="todo">TODO — A sentence or two.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ 6. CONTACT ============ -->
+    <section id="contact" aria-labelledby="contact-heading">
+      <p class="section-eyebrow">Label Five</p>
+      <h2 id="contact-heading">Contact</h2>
+      <p class="section-intro">The booth is open. Leave a message.</p>
+
+      <div class="contact">
+        <form class="contact__form" action="#contact" method="get">
+          <fieldset>
+            <legend>Send me a message</legend>
+
+            <p class="field">
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" autocomplete="name"
+                     placeholder="Ada Lovelace" required>
+            </p>
+
+            <p class="field">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" autocomplete="email"
+                     placeholder="you@example.com" required>
+            </p>
+
+            <p class="field">
+              <label for="topic">What is this about?</label>
+              <select id="topic" name="topic">
+                <option value="hello">Just saying hi</option>
+                <option value="project">A project idea</option>
+                <option value="work">Work or internship</option>
+                <option value="other">Something else</option>
+              </select>
+            </p>
+
+            <p class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5"
+                        placeholder="Say whatever you like." required></textarea>
+            </p>
+
+            <p class="field field--check">
+              <input type="checkbox" id="copy" name="copy" value="yes">
+              <label for="copy">Email me a copy of this message</label>
+            </p>
+
+            <button type="submit" class="button">Send it</button>
+            <p class="form-note">
+              This form does not go anywhere yet — the backend arrives in Assignment 2.
+            </p>
+          </fieldset>
+        </form>
+
+        <div class="contact__direct">
+          <h3>Or reach me directly</h3>
+          <ul class="contact__list">
+            <li><span class="contact__key">Email</span> <a class="todo" href="#contact">TODO — your@email.com</a></li>
+            <li><span class="contact__key">GitHub</span> <a class="todo" href="#contact">TODO — github.com/you</a></li>
+            <li><span class="contact__key">LinkedIn</span> <a class="todo" href="#contact">TODO — linkedin.com/in/you</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p class="site-footer__rule">Safety Matches &middot; Average Contents 5 Labels</p>
+    <p>Built by hand with HTML and CSS by Jayalakshmi Venkatesan &middot; CS1303 Full Stack Development &middot; NIT Warangal</p>
+    <p><a href="#intro">Back to the top</a></p>
+  </footer>
+</body>
+</html>

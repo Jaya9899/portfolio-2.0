@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 380" width="300" height="380">
+  <title>Placeholder frame for a photograph</title>
+
+  <rect x="10" y="8" width="282" height="364" fill="#E5A50A"/>
+  <rect x="8" y="10" width="282" height="364" fill="#F2E8D5"/>
+
+  <rect x="14" y="16" width="270" height="352" fill="none" stroke="#1A1512" stroke-width="3"/>
+  <rect x="20" y="22" width="258" height="340" fill="none" stroke="#1A1512" stroke-width="1"/>
+
+  <rect x="21" y="23" width="256" height="30" fill="#14685A"/>
+  <text x="149" y="45" font-family="Arial Black, Arial, sans-serif" font-size="17"
+        fill="#F2E8D5" text-anchor="middle" letter-spacing="1">STUDIO PORTRAIT</text>
+
+  <!-- Bust silhouette -->
+  <g fill="#2E3A87">
+    <circle cx="149" cy="160" r="46"/>
+    <path d="M67 300 a82 78 0 0 1 164 0 Z"/>
+  </g>
+
+  <text x="149" y="330" font-family="Arial, Helvetica, sans-serif" font-size="15"
+        font-weight="bold" fill="#1A1512" text-anchor="middle">REPLACE THIS FILE</text>
+  <text x="149" y="349" font-family="Arial, Helvetica, sans-serif" font-size="12"
+        fill="#A8340A" text-anchor="middle">assets/jaya.jpg</text>
+</svg>

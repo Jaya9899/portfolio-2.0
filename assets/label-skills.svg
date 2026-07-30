@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="300" height="200">
+  <title>Dynamo Brand matchbox label</title>
+
+  <rect x="12" y="10" width="278" height="182" fill="#A8340A"/>
+  <rect x="10" y="12" width="278" height="182" fill="#F2E8D5"/>
+
+  <rect x="16" y="18" width="266" height="170" fill="none" stroke="#1A1512" stroke-width="3"/>
+  <rect x="22" y="24" width="254" height="158" fill="none" stroke="#1A1512" stroke-width="1"/>
+
+  <rect x="23" y="25" width="252" height="30" fill="#2E3A87"/>
+  <text x="149" y="47" font-family="Arial Black, Arial, sans-serif" font-size="21"
+        fill="#F2E8D5" text-anchor="middle" letter-spacing="2">DYNAMO</text>
+
+  <!-- Motif: a filament bulb, throwing light -->
+  <g stroke="#E5A50A" stroke-width="4" stroke-linecap="round">
+    <path d="M100 68 l-12 -10"/>
+    <path d="M92 96 h-16"/>
+    <path d="M100 124 l-12 10"/>
+    <path d="M200 68 l12 -10"/>
+    <path d="M208 96 h16"/>
+    <path d="M200 124 l12 10"/>
+  </g>
+  <circle cx="150" cy="96" r="33" fill="#E5A50A" stroke="#1A1512" stroke-width="3"/>
+  <path d="M139 112 v-14 q11 -16 22 0 v14" fill="none"
+        stroke="#1A1512" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  <g fill="#1A1512">
+    <rect x="138" y="128" width="24" height="7" rx="2"/>
+    <rect x="138" y="138" width="24" height="6" rx="2"/>
+    <path d="M144 147 h12 l-3 8 h-6 z"/>
+  </g>
+
+  <rect x="23" y="152" width="252" height="30" fill="#A8340A"/>
+  <text x="149" y="172" font-family="Arial, Helvetica, sans-serif" font-size="15"
+        font-weight="bold" fill="#F2E8D5" text-anchor="middle" letter-spacing="3">SKILLS</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="300" height="200">
+  <title>PCO Brand matchbox label</title>
+
+  <rect x="12" y="10" width="278" height="182" fill="#A8340A"/>
+  <rect x="10" y="12" width="278" height="182" fill="#F2E8D5"/>
+
+  <rect x="16" y="18" width="266" height="170" fill="none" stroke="#1A1512" stroke-width="3"/>
+  <rect x="22" y="24" width="254" height="158" fill="none" stroke="#1A1512" stroke-width="1"/>
+
+  <rect x="23" y="25" width="252" height="30" fill="#14685A"/>
+  <text x="149" y="47" font-family="Arial Black, Arial, sans-serif" font-size="19"
+        fill="#F2E8D5" text-anchor="middle" letter-spacing="2">STD · ISD · PCO</text>
+
+  <!-- Ring marks, drawn first so the phone sits over them -->
+  <g stroke="#E5A50A" stroke-width="4" stroke-linecap="round" fill="none">
+    <path d="M78 76 q-10 16 0 32"/>
+    <path d="M64 66 q-17 26 0 52"/>
+    <path d="M222 76 q10 16 0 32"/>
+    <path d="M236 66 q17 26 0 52"/>
+  </g>
+
+  <!-- Motif: a rotary telephone, handset resting on the cradle -->
+  <g fill="#1A1512">
+    <!-- body -->
+    <path d="M98 140 L202 140 L186 98 L114 98 Z"/>
+    <rect x="92" y="140" width="116" height="8" rx="2"/>
+    <!-- handset -->
+    <path d="M99 60 L129 60 L125 88 L103 88 Z"/>
+    <path d="M201 60 L171 60 L175 88 L197 88 Z"/>
+    <rect x="118" y="66" width="64" height="14" rx="7"/>
+  </g>
+
+  <!-- dial -->
+  <circle cx="150" cy="119" r="19" fill="#F2E8D5" stroke="#1A1512" stroke-width="3"/>
+  <g fill="#1A1512">
+    <circle cx="150" cy="119" r="4.5"/>
+    <circle cx="150" cy="106" r="3"/>
+    <circle cx="159" cy="110" r="3"/>
+    <circle cx="163" cy="119" r="3"/>
+    <circle cx="159" cy="128" r="3"/>
+    <circle cx="150" cy="132" r="3"/>
+    <circle cx="141" cy="128" r="3"/>
+    <circle cx="137" cy="119" r="3"/>
+    <circle cx="141" cy="110" r="3"/>
+  </g>
+
+  <rect x="23" y="152" width="252" height="30" fill="#A8340A"/>
+  <text x="149" y="172" font-family="Arial, Helvetica, sans-serif" font-size="15"
+        font-weight="bold" fill="#F2E8D5" text-anchor="middle" letter-spacing="3">CONTACT</text>
+</svg>
