@@ -1,37 +1,3 @@
-/* ==========================================================================
-   Jaya's World — stylesheet
-   CS1303 Full Stack Development, Assignment 1
-
-   WHERE EACH REQUIREMENT IS MET
-   -----------------------------
-   External stylesheet only ....... this file; index.html has no <style> tag
-                                    and no style="" attributes anywhere
-   :root custom properties ........ section 1 (including the two bevels,
-                                    which are the whole visual language)
-   CSS Grid ....................... .desktop__grid (s.6), .project-grid (s.9),
-                                    .about (s.8), .contact (s.11)
-   Flexbox ........................ .taskbar (s.4), .window__bar (s.7),
-                                    .chips (s.10), .factsheet__row (s.8)
-   Breakpoint: tablet <= 768px .... section 13
-   Breakpoint: mobile <= 480px .... section 14
-   Interactive state (:hover) ..... .shortcut a:hover (s.6), .button (s.11)
-   Interactive state (:focus) ..... .shortcut a:focus-visible (s.6),
-                                    form fields (s.11), global ring (s.2)
-   CSS transition ................. shortcut title bar and lift (s.6),
-                                    button press (s.11)
-   CSS animation .................. @keyframes window-open (s.6), staggered
-   Reduced motion respected ....... section 15
-   Colour contrast ................ every text/background pair is >= 4.5:1,
-                                    ratios noted in section 1
-   ========================================================================== */
-
-
-/* ==========================================================================
-   1. DESIGN TOKENS
-   The palette is the Windows 2000 system palette. Contrast ratios are
-   measured against the background each colour actually sits on, and all
-   clear the WCAG AA threshold of 4.5:1 for body text.
-   ========================================================================== */
 
 :root {
   /* System greys */
@@ -41,11 +7,16 @@
   --shadow:   #808080;
   --dark:     #0A0A0A;
 
-  /* Desktop and title bars */
-  --desktop:  #008080;   /* white text on this measures         4.8:1  */
+  /* Title bars */
   --title-1:  #0A246A;   /* active title bar, left end         12.9:1  */
   --title-2:  #3A6EA5;   /* active title bar, right end         5.3:1  */
   --title-off:#6E6E6E;   /* inactive title bar                  5.1:1  */
+
+  /* The desktop is a brushed-chrome gradient now, not flat teal. Black ink
+     text sits on the lightest band of it and clears AA comfortably. */
+  --chrome-1: #B9C2CC;   /* steel  */
+  --chrome-2: #E3E9EF;   /* silver */
+  --chrome-3: #9AA7B4;   /* chrome */
 
   /* Text */
   --ink:      #000000;   /* on --face 15.9:1, on white         21.0:1  */
@@ -94,7 +65,8 @@
 }
 
 html {
-  scroll-behavior: smooth;   /* every shortcut is a jump link, so ease them */
+  scroll-behavior: smooth;      /* every shortcut is a jump link, so ease them */
+  scroll-padding-top: 52px;     /* keep headings clear of the fixed top bar   */
 }
 
 body {
@@ -102,8 +74,15 @@ body {
   font-size: 0.9375rem;      /* 15px — bigger than the 11px the real UI used */
   line-height: 1.6;
   color: var(--ink);
-  background: var(--desktop);
-  padding-bottom: 60px;      /* clear the fixed taskbar */
+  /* Brushed chrome: a fine vertical grain laid over a soft steel-to-silver
+     gradient. Fixed so it stays put while the windows scroll across it. */
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px, transparent 3px),
+    linear-gradient(160deg, var(--chrome-1) 0%, var(--chrome-2) 46%, var(--chrome-3) 100%);
+  background-attachment: fixed;
+  padding-top: 48px;         /* clear the fixed taskbar, now up top */
 }
 
 h1, h2, h3 {
@@ -137,7 +116,7 @@ textarea:focus-visible {
 
 .taskbar a:focus-visible,
 .desktop a:focus-visible {
-  outline-color: var(--white);
+  outline-color: var(--ink);
 }
 
 
@@ -165,13 +144,13 @@ textarea:focus-visible {
 
 /* ==========================================================================
    4. TASKBAR                                                   [FLEXBOX]
-   One row of controls pinned to the bottom edge. A row is one-dimensional
-   content, so this is Flexbox rather than Grid.
+   One row of controls pinned to the top edge as the page header. A row is
+   one-dimensional content, so this is Flexbox rather than Grid.
    ========================================================================== */
 
 .taskbar {
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
   z-index: 100;
@@ -242,7 +221,7 @@ textarea:focus-visible {
   margin: 0 auto;
   padding: var(--space-5) var(--space-3) var(--space-4);
   text-align: center;
-  color: var(--white);
+  color: var(--ink);               /* dark text now that the desktop is light */
 }
 
 .desktop__eyebrow {
@@ -255,13 +234,38 @@ textarea:focus-visible {
 h1 {
   font-size: clamp(2.25rem, 8vw, 4rem);
   letter-spacing: -0.02em;
-  /* The soft drop shadow desktop icon labels always had */
-  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+  /* Fallback: solid slate with a raised bevel (light above, dark below). */
+  color: #2b3a4a;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7), 2px 2px 0 rgba(0, 0, 0, 0.3);
 }
 
-.desktop__tagline {
+/* The signature: "Jaya's World" cast in polished chrome. A hard band of
+   white -> silver -> steel -> white reads as a reflection across the letters;
+   the drop shadow gives them a dark edge so they stay legible on the light
+   desktop. Falls back to the solid slate above where background-clip is out. */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  h1 {
+    background: linear-gradient(180deg,
+      #ffffff 0%,
+      #dbe3ea 28%,
+      #8a97a6 50%,
+      #6f7d8c 54%,
+      #c3ccd6 74%,
+      #ffffff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: none;
+    filter: drop-shadow(1px 2px 0 rgba(0, 0, 0, 0.3));
+  }
+}
+
+.desktop__name {
   margin: var(--space-2) auto var(--space-5);
-  max-width: 42ch;
+  font-size: 1.125rem;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+  color: #2b3a4a;
 }
 
 .statusbar {
@@ -357,12 +361,28 @@ h1 {
 }
 
 .shortcut__body {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
   padding: var(--space-3) var(--space-1);
   background: var(--white);
   box-shadow: var(--bevel-in);
   font-size: 0.9375rem;
   text-align: center;
+}
+
+/* The pixel icon that names each window at a glance. It lifts and grows a
+   touch when its shortcut is hovered or focused, alongside the title bar. */
+.shortcut__icon {
+  width: 44px;
+  height: 44px;
+  transition: transform var(--speed) ease;
+}
+
+.shortcut a:hover .shortcut__icon,
+.shortcut a:focus-visible .shortcut__icon {
+  transform: scale(1.12) translateY(-1px);
 }
 
 /* Hovering or tabbing to a shortcut brings its window to the front:
@@ -430,11 +450,6 @@ h2 {
 h3 {
   font-size: 1.0625rem;
   margin-bottom: var(--space-1);
-}
-
-.lede {
-  margin-bottom: var(--space-4);
-  color: var(--ink);
 }
 
 /* Every unfinished bit of copy is marked, so nothing gets left behind.
@@ -689,11 +704,6 @@ h3.todo {
 .button:active {
   box-shadow: var(--bevel-in);
   padding: 7px 21px 5px 23px;
-}
-
-.form-note {
-  margin-top: var(--space-2);
-  font-size: 0.8125rem;
 }
 
 .contact__list li {
