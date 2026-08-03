@@ -22,9 +22,9 @@ README.md             this file!
 - W3C CSS validator - 0 errors
 
 
-![alt text](image.png)
+![alt text](asset/image.png)
 
-![alt text](image-1.png)
+![alt text](asset/image-1.png)
 
 ## Usage of AI
 
