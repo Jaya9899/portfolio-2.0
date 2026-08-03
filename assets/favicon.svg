@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- upper wings -->
+  <ellipse cx="10" cy="12" rx="6.5" ry="5.5" fill="#C9B6F2" stroke="#5A2E86" stroke-width="1"/>
+  <ellipse cx="22" cy="12" rx="6.5" ry="5.5" fill="#C9B6F2" stroke="#5A2E86" stroke-width="1"/>
+  <!-- lower wings -->
+  <ellipse cx="11" cy="21" rx="5.2" ry="4.8" fill="#22D3EE" stroke="#5A2E86" stroke-width="1"/>
+  <ellipse cx="21" cy="21" rx="5.2" ry="4.8" fill="#22D3EE" stroke="#5A2E86" stroke-width="1"/>
+  <!-- wing spots -->
+  <circle cx="9" cy="12" r="1.4" fill="#FFD400"/>
+  <circle cx="23" cy="12" r="1.4" fill="#FFD400"/>
+  <!-- body -->
+  <ellipse cx="16" cy="16" rx="1.5" ry="8" fill="#3A2A5A"/>
+  <!-- antennae -->
+  <path d="M16 8.5 C14 4.5, 11.5 4, 10.5 5" stroke="#3A2A5A" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <path d="M16 8.5 C18 4.5, 20.5 4, 21.5 5" stroke="#3A2A5A" stroke-width="1" fill="none" stroke-linecap="round"/>
+</svg>

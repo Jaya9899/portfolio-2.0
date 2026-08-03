@@ -172,15 +172,6 @@ textarea:focus-visible {
   box-shadow: var(--bevel-in);
 }
 
-.taskbar__clock {
-  flex: 0 0 auto;
-  margin-left: auto;
-  padding: 4px 10px;
-  box-shadow: var(--bevel-in);
-  font-size: 0.8125rem;
-  white-space: nowrap;
-}
-
 
 /* desktop for intro*/
 .desktop {
@@ -229,16 +220,6 @@ h1 {
   font-weight: bold;
   letter-spacing: 0.02em;
   color: #2b3a4a;
-}
-
-.statusbar {
-  margin-top: var(--space-3);
-  padding: 3px 10px;
-  background: var(--face);
-  box-shadow: var(--bevel-in);
-  color: var(--ink);
-  font-size: 0.75rem;
-  text-align: left;
 }
 
 /*desktop grids*/
@@ -685,10 +666,6 @@ h3 {
 
   .site-footer p {
     flex: 1 1 100%;
-  }
-
-  .taskbar__clock {
-    display: none;
   }
 }
 
