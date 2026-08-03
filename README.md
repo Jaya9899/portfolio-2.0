@@ -7,14 +7,14 @@ To run -> click index.html
 
 
 ## Files
-'''
+```
 index.html            webpage
 style.css             stylesheet
 assets/               photo placeholder and favicon
 screenshots/          captures for responsiveness
 responsive-views.pdf  
 README.md             this file!
-'''
+```
 
 ## Validation
 
