@@ -1,31 +1,21 @@
-
 :root {
-  /* System greys */
   --white:    #FFFFFF;
   --light:    #DFDFDF;
-  --face:     #D4D0C8;   /* the classic button/window grey             */
+  --face:     #D4D0C8;  
   --shadow:   #808080;
   --dark:     #0A0A0A;
 
-  /* Title bars */
-  --title-1:  #0A246A;   /* active title bar, left end         12.9:1  */
-  --title-2:  #3A6EA5;   /* active title bar, right end         5.3:1  */
-  --title-off:#6E6E6E;   /* inactive title bar                  5.1:1  */
+  --title-1:  #0A246A;  
+  --title-2:  #3A6EA5; 
+  --title-off:#6E6E6E;   
 
-  /* The desktop is a brushed-chrome gradient now, not flat teal. Black ink
-     text sits on the lightest band of it and clears AA comfortably. */
-  --chrome-1: #B9C2CC;   /* steel  */
-  --chrome-2: #E3E9EF;   /* silver */
-  --chrome-3: #9AA7B4;   /* chrome */
-
+  --chrome-1: #B9C2CC;  
+  --chrome-2: #E3E9EF;  
+  --chrome-3: #9AA7B4;  
   /* Text */
-  --ink:      #000000;   /* on --face 15.9:1, on white         21.0:1  */
-  --link:     #000080;   /* on white 16.0:1, on --face         10.4:1  */
-  --alert:    #8B0000;   /* TODO markers, on white             10.0:1  */
-
-  /* The two bevels. Four inset shadows each: an outer highlight and an
-     outer shadow, then an inner highlight and an inner shadow. That
-     two-tone edge is what made every Windows control look moulded. */
+  --ink:      #000000;
+  --link:     #000080;
+/* creates the window effect*/
   --bevel-out:
     inset  1px  1px 0 var(--white),
     inset -1px -1px 0 var(--dark),
@@ -37,12 +27,9 @@
     inset  2px  2px 0 var(--dark),
     inset -2px -2px 0 var(--light);
 
-  /* Type. Tahoma shipped with Windows 2000 and is still on most machines,
-     so nothing has to be downloaded for this page to look right. */
   --font: Tahoma, "MS Sans Serif", Verdana, Geneva, sans-serif;
   --font-mono: "Courier New", Courier, monospace;
 
-  /* Spacing */
   --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 1.5rem;
@@ -53,11 +40,6 @@
   --speed: 0.18s;
 }
 
-
-/* ==========================================================================
-   2. BASE
-   ========================================================================== */
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -65,24 +47,22 @@
 }
 
 html {
-  scroll-behavior: smooth;      /* every shortcut is a jump link, so ease them */
-  scroll-padding-top: 52px;     /* keep headings clear of the fixed top bar   */
+  scroll-behavior: smooth;
+  scroll-padding-top: 52px;  
 }
 
 body {
   font-family: var(--font);
-  font-size: 0.9375rem;      /* 15px — bigger than the 11px the real UI used */
+  font-size: 0.9375rem;
   line-height: 1.6;
   color: var(--ink);
-  /* Brushed chrome: a fine vertical grain laid over a soft steel-to-silver
-     gradient. Fixed so it stays put while the windows scroll across it. */
   background:
     repeating-linear-gradient(90deg,
       rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.05) 1px,
       transparent 1px, transparent 3px),
     linear-gradient(160deg, var(--chrome-1) 0%, var(--chrome-2) 46%, var(--chrome-3) 100%);
   background-attachment: fixed;
-  padding-top: 48px;         /* clear the fixed taskbar, now up top */
+  padding-top: 48px;       
 }
 
 h1, h2, h3 {
@@ -104,7 +84,6 @@ ul {
   list-style: none;
 }
 
-/* One focus ring for the whole page. Dotted, the way focus looked then. */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -119,11 +98,7 @@ textarea:focus-visible {
   outline-color: var(--ink);
 }
 
-
-/* ==========================================================================
-   3. SKIP LINK
-   ========================================================================== */
-
+/* skiplink*/
 .skip-link {
   position: absolute;
   top: -100px;
@@ -142,12 +117,7 @@ textarea:focus-visible {
 }
 
 
-/* ==========================================================================
-   4. TASKBAR                                                   [FLEXBOX]
-   One row of controls pinned to the top edge as the page header. A row is
-   one-dimensional content, so this is Flexbox rather than Grid.
-   ========================================================================== */
-
+/* flex box as taskbar for header*/
 .taskbar {
   position: fixed;
   top: 0;
@@ -160,7 +130,7 @@ textarea:focus-visible {
   padding: 4px 6px;
   background: var(--face);
   box-shadow: var(--bevel-out);
-  overflow-x: auto;          /* narrow screens scroll rather than wrap */
+  overflow-x: auto;      
 }
 
 .taskbar__start {
@@ -212,16 +182,13 @@ textarea:focus-visible {
 }
 
 
-/* ==========================================================================
-   5. THE DESKTOP (introduction)
-   ========================================================================== */
-
+/* desktop for intro*/
 .desktop {
   max-width: var(--page);
   margin: 0 auto;
   padding: var(--space-5) var(--space-3) var(--space-4);
   text-align: center;
-  color: var(--ink);               /* dark text now that the desktop is light */
+  color: var(--ink);
 }
 
 .desktop__eyebrow {
@@ -234,15 +201,11 @@ textarea:focus-visible {
 h1 {
   font-size: clamp(2.25rem, 8vw, 4rem);
   letter-spacing: -0.02em;
-  /* Fallback: solid slate with a raised bevel (light above, dark below). */
   color: #2b3a4a;
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7), 2px 2px 0 rgba(0, 0, 0, 0.3);
 }
 
-/* The signature: "Jaya's World" cast in polished chrome. A hard band of
-   white -> silver -> steel -> white reads as a reflection across the letters;
-   the drop shadow gives them a dark edge so they stay legible on the light
-   desktop. Falls back to the solid slate above where background-clip is out. */
+/* hello world beveled */
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   h1 {
     background: linear-gradient(180deg,
@@ -278,15 +241,7 @@ h1 {
   text-align: left;
 }
 
-
-/* ==========================================================================
-   6. SHORTCUTS                                                 [CSS GRID]
-   Six equal columns. Each shortcut spans two of them, so the first row
-   holds three and the second row starts one column in, which centres it.
-   Flexbox cannot place items across rows and columns like that — that is
-   why the shortcuts are Grid and the taskbar above is Flex.
-   ========================================================================== */
-
+/*desktop grids*/
 .desktop__grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -299,7 +254,6 @@ h1 {
 .shortcut--4 { grid-column: 2 / span 2; animation-delay: 0.29s; }
 .shortcut--5 { grid-column: 4 / span 2; animation-delay: 0.37s; }
 
-/* The windows open one after another when the page loads. */
 .shortcut {
   opacity: 0;
   animation: window-open 0.35s ease-out forwards;
@@ -333,8 +287,6 @@ h1 {
   font-weight: bold;
 }
 
-/* The active-window blue sits on top of the inactive grey and fades in.
-   Two backgrounds rather than one because a gradient cannot be animated. */
 .shortcut__bar::before {
   content: "";
   position: absolute;
@@ -349,7 +301,7 @@ h1 {
 
 .shortcut__file,
 .shortcut__buttons {
-  position: relative;   /* keep the text above the fading blue */
+  position: relative; 
 }
 
 .shortcut__file {
@@ -372,8 +324,7 @@ h1 {
   text-align: center;
 }
 
-/* The pixel icon that names each window at a glance. It lifts and grows a
-   touch when its shortcut is hovered or focused, alongside the title bar. */
+/* icon also grows when hovered */
 .shortcut__icon {
   width: 44px;
   height: 44px;
@@ -385,8 +336,7 @@ h1 {
   transform: scale(1.12) translateY(-1px);
 }
 
-/* Hovering or tabbing to a shortcut brings its window to the front:
-   the title bar lights up from inactive grey to active blue. */
+/* lifting title bar when hovered */
 .shortcut a:hover,
 .shortcut a:focus-visible {
   transform: translateY(-3px);
@@ -396,13 +346,6 @@ h1 {
 .shortcut a:focus-visible .shortcut__bar::before {
   opacity: 1;
 }
-
-
-/* ==========================================================================
-   7. WINDOWS                                                   [FLEXBOX]
-   Every section below the desktop is a window: a title bar with the file
-   path on the left and the buttons on the right, then a sunken white body.
-   ========================================================================== */
 
 .window {
   max-width: var(--page);
@@ -451,25 +394,6 @@ h3 {
   font-size: 1.0625rem;
   margin-bottom: var(--space-1);
 }
-
-/* Every unfinished bit of copy is marked, so nothing gets left behind.
-   Delete the class once the real text is in. */
-.todo {
-  color: var(--alert);
-  font-style: italic;
-}
-
-p.todo,
-h3.todo {
-  border-left: 4px solid var(--alert);
-  padding-left: var(--space-2);
-}
-
-
-/* ==========================================================================
-   8. ABOUT                                          [CSS GRID + FLEXBOX]
-   ========================================================================== */
-
 .about {
   display: grid;
   grid-template-columns: 300px 1fr;
@@ -502,7 +426,7 @@ h3.todo {
   margin-top: var(--space-3);
 }
 
-/* Each row is one line of label plus value, so Flexbox. */
+/* each row is one line of label plus value */
 .factsheet__row {
   display: flex;
   flex-wrap: wrap;
@@ -519,18 +443,6 @@ h3.todo {
 .factsheet dd {
   flex: 1 1 12rem;
 }
-
-.factsheet dd.todo {
-  border-left: none;
-  padding-left: 0;
-}
-
-
-/* ==========================================================================
-   9. PROJECTS                                       [CSS GRID + FLEXBOX]
-   auto-fit with a minimum card width means the gallery goes 3-up, then
-   2-up, then 1-up on its own — no media query needed for this part.
-   ========================================================================== */
 
 .project-grid {
   display: grid;
@@ -577,12 +489,6 @@ h3.todo {
   font-size: 0.875rem;
 }
 
-
-/* ==========================================================================
-   10. SKILLS                                                    [FLEXBOX]
-   A bag of chips that only needs to wrap — one-dimensional, so Flexbox.
-   ========================================================================== */
-
 #skills h3 {
   margin-top: var(--space-3);
 }
@@ -600,17 +506,6 @@ h3.todo {
   box-shadow: var(--bevel-out);
   font-size: 0.875rem;
 }
-
-.chips li.todo {
-  background: var(--white);
-  box-shadow: var(--bevel-in);
-}
-
-
-/* ==========================================================================
-   11. BEYOND CODE + CONTACT                                    [CSS GRID]
-   ========================================================================== */
-
 .beyond-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -629,14 +524,6 @@ h3.todo {
   padding: var(--space-3);
   background: var(--face);
   box-shadow: var(--bevel-out);
-}
-
-.contact__form legend {
-  padding: 2px 8px;
-  background: var(--face);
-  box-shadow: var(--bevel-out);
-  font-size: 0.8125rem;
-  font-weight: bold;
 }
 
 .field {
@@ -667,22 +554,6 @@ h3.todo {
   resize: vertical;
 }
 
-/* The checkbox sits beside its label rather than above it. */
-.field--check {
-  display: flex;
-  align-items: center;
-  gap: var(--space-1);
-}
-
-.field--check label {
-  margin-bottom: 0;
-}
-
-.field--check input {
-  width: 1rem;
-  height: 1rem;
-}
-
 .button {
   font-family: var(--font);
   font-size: 0.9375rem;
@@ -700,7 +571,7 @@ h3.todo {
   background: var(--light);
 }
 
-/* Pressing it flips the bevel, so the button really does go in. */
+/* pressing it flips the bevel, so the button actually goes in - pretty cool */
 .button:active {
   box-shadow: var(--bevel-in);
   padding: 7px 21px 5px 23px;
@@ -716,17 +587,6 @@ h3.todo {
   min-width: 5.5rem;
   font-weight: bold;
 }
-
-.contact__list a.todo {
-  border-left: none;
-  padding-left: 0;
-}
-
-
-/* ==========================================================================
-   12. FOOTER
-   Styled as the status bar along the bottom of a window.
-   ========================================================================== */
 
 .site-footer {
   display: flex;
@@ -751,29 +611,17 @@ h3.todo {
 }
 
 
-/* ==========================================================================
-   13. TABLET — 768px and below
-   Three shortcuts across is too tight, so the desktop becomes two columns
-   and the side-by-side sections stack.
-   ========================================================================== */
-
+/* responsiveness for tablet*/
 @media (max-width: 768px) {
 
   .desktop__grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-2);
   }
-
-  /* Let the shortcuts flow in order instead of holding fixed columns. */
   .shortcut--1, .shortcut--2, .shortcut--3,
   .shortcut--4, .shortcut--5 {
     grid-column: auto;
   }
-
-  /* The fifth has no partner on its row, so centre it across both columns.
-     The width: 100% matters — auto side margins make a grid item shrink to
-     fit its text instead of filling its track, and max-width alone cannot
-     push it back out again. */
   .shortcut--5 {
     grid-column: 1 / -1;
     width: 100%;
@@ -798,14 +646,7 @@ h3.todo {
     padding: var(--space-3) var(--space-2);
   }
 }
-
-
-/* ==========================================================================
-   14. MOBILE — 480px and below
-   One shortcut per row, and the windows lose their outer margin so they
-   use the full width of a narrow screen.
-   ========================================================================== */
-
+/*mobile*/
 @media (max-width: 480px) {
 
   .desktop {
@@ -846,19 +687,11 @@ h3.todo {
     flex: 1 1 100%;
   }
 
-  /* The taskbar keeps to one row and scrolls sideways instead of growing
-     tall, so it never eats the screen. */
   .taskbar__clock {
     display: none;
   }
 }
 
-
-/* ==========================================================================
-   15. REDUCED MOTION
-   Some people get motion sick or find animation distracting, and the
-   operating system lets them say so. Honour it.
-   ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -873,9 +706,6 @@ h3.todo {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-
-  /* The shortcuts are hidden until their opening animation runs, so make
-     sure they are visible when that animation is switched off. */
   .shortcut {
     opacity: 1;
   }

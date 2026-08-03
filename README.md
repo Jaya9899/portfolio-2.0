@@ -18,10 +18,19 @@ README.md             this file!
 
 ## Validation
 
-Checked on 30 July 2026:
+- W3C Nu HTML validator - 0 errors
+- W3C CSS validator - 0 errors
 
-- **W3C Nu HTML validator** - 0 errors, 0 warnings
-- **W3C CSS validator (CSS3 profile)** - 0 errors
 
-Re-run them at https://validator.w3.org/nu/ and https://jigsaw.w3.org/css-validator/
-by uploading the files after you fill in your content.
+![alt text](image.png)
+
+![alt text](image-1.png)
+
+## Usage of AI
+
+Used AI tools for styling aspects:
+1. "hello world" bevel, and gradient effect (learn about webkits)
+2. Responsiveness for multi-media purpose (in mobile, tablet, laptop etc)
+
+
+

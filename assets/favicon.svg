@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <title>A small window</title>
-  <rect width="64" height="64" fill="#008080"/>
-  <rect x="8" y="10" width="48" height="44" fill="#D4D0C8"/>
-  <path d="M8 54 V10 H56 V14 H12 V54 Z" fill="#FFFFFF"/>
-  <path d="M56 10 V54 H8 V50 H52 V10 Z" fill="#404040"/>
-  <rect x="12" y="14" width="40" height="10" fill="#0A246A"/>
-  <rect x="12" y="28" width="40" height="22" fill="#FFFFFF"/>
-</svg>
