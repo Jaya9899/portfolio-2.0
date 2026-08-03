@@ -5,16 +5,16 @@ The design approach was to have a 2000s desktop feel, with old windows and task 
 
 To run -> click index.html
 
----
 
 ## Files
-
+'''
 index.html            webpage
 style.css             stylesheet
 assets/               photo placeholder and favicon
 screenshots/          captures for responsiveness
 responsive-views.pdf  
 README.md             this file!
+'''
 
 ## Validation
 
