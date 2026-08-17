@@ -1,8 +1,0 @@
-node_modules/
-dist/
-.vite/
-
-# editor / OS noise
-.DS_Store
-*.local
-.vscode/

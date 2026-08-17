@@ -23,6 +23,13 @@ npm run preview   -> serves the built version
 
 Needs Node 18 or newer. Built with Vite, React 19 and react-router-dom 7.
 
+## Screen recording
+
+A short walkthrough of the theme toggle, navigating between routes, the dynamic project detail
+route, and the contact form validation:
+
+[Watch the demo](https://drive.google.com/file/d/13Z8jJkTqX6LA3AmHWf6tdzal5COtyqWS/view?usp=sharing)
+
 ## Files
 
 ```
@@ -48,11 +55,7 @@ src/
                          contactLinks.js
   assets/jaya.jpg
   styles/global.css      variables, both themes, reset, shared bits
-docs/assignment-1/       my A1 submission, kept for reference
 ```
-
-The old `index.html` + `style.css` are in `docs/assignment-1/` now instead of being deleted,
-along with the validator screenshots and the responsive views PDF.
 
 ## Component tree
 
