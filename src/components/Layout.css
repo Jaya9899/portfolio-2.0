@@ -1,0 +1,9 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--taskbar-h));
+}
+
+.layout__main {
+  flex: 1 1 auto;
+}

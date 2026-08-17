@@ -1,0 +1,181 @@
+.desktop {
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-3) var(--space-4);
+  text-align: center;
+  color: var(--ink);
+}
+
+.desktop__eyebrow {
+  font-size: 0.8125rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+
+.desktop__title {
+  font-size: clamp(2.25rem, 8vw, 4rem);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7), 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Chrome lettering: the gradient is painted through the glyphs. The token
+   changes per theme so the mid-tones stay readable on the dark wallpaper. */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .desktop__title {
+    background: var(--lettering);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: none;
+    filter: drop-shadow(1px 2px 0 rgba(0, 0, 0, 0.3));
+  }
+}
+
+.desktop__name {
+  margin: var(--space-2) auto var(--space-5);
+  font-size: 1.125rem;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+}
+
+.desktop__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-3);
+}
+
+/* Two staggered rows: three across the top, two centred below. */
+.shortcut--1 { grid-column: 1 / span 2; animation-delay: 0.05s; }
+.shortcut--2 { grid-column: 3 / span 2; animation-delay: 0.13s; }
+.shortcut--3 { grid-column: 5 / span 2; animation-delay: 0.21s; }
+.shortcut--4 { grid-column: 2 / span 2; animation-delay: 0.29s; }
+.shortcut--5 { grid-column: 4 / span 2; animation-delay: 0.37s; }
+
+.shortcut {
+  opacity: 0;
+  animation: window-open 0.35s ease-out forwards;
+}
+
+@keyframes window-open {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.shortcut a {
+  display: block;
+  padding: 3px;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform var(--speed) ease;
+}
+
+.shortcut__bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-1);
+  padding: 3px 5px;
+  background: var(--title-off);
+  color: var(--title-ink);
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* Inactive title bar that lights up to the active gradient on hover. */
+.shortcut__bar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--title-1), var(--title-2));
+  opacity: 0;
+  transition: opacity var(--speed) ease;
+}
+
+.shortcut__file,
+.shortcut__buttons {
+  position: relative;
+}
+
+.shortcut__file { font-family: var(--font-mono); }
+.shortcut__buttons { letter-spacing: 0.15em; }
+
+.shortcut__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-1);
+  background: var(--surface);
+  box-shadow: var(--bevel-in);
+  font-size: 0.9375rem;
+  text-align: center;
+}
+
+.shortcut__icon {
+  width: 44px;
+  height: 44px;
+  transition: transform var(--speed) ease;
+}
+
+.shortcut a:hover .shortcut__icon,
+.shortcut a:focus-visible .shortcut__icon {
+  transform: scale(1.12) translateY(-1px);
+}
+
+.shortcut a:hover,
+.shortcut a:focus-visible {
+  transform: translateY(-3px);
+}
+
+.shortcut a:hover .shortcut__bar::before,
+.shortcut a:focus-visible .shortcut__bar::before {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .desktop {
+    padding-top: var(--space-4);
+  }
+
+  .desktop__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2);
+  }
+
+  .shortcut--1, .shortcut--2, .shortcut--3,
+  .shortcut--4, .shortcut--5 {
+    grid-column: auto;
+  }
+
+  .shortcut--5 {
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .desktop {
+    padding: var(--space-4) var(--space-2) var(--space-3);
+  }
+
+  .desktop__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shortcut--5 { max-width: none; }
+
+  .shortcut__body {
+    padding: var(--space-2) var(--space-1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shortcut { opacity: 1; }
+}

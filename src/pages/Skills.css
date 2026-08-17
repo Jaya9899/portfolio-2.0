@@ -1,0 +1,7 @@
+.skills__group {
+  margin-top: var(--space-3);
+}
+
+.skills__group:first-of-type {
+  margin-top: 0;
+}

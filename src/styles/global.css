@@ -1,0 +1,294 @@
+/* ==========================================================================
+   global.css: design tokens, reset, base elements, shared primitives.
+   Carried over from Assignment 1's style.css and re-tokenised so that the
+   whole Windows-95 look can be re-skinned by swapping variables alone.
+
+   The four bevel tokens are the important change from Assignment 1.
+   Previously the bevel borrowed --white / --light / --shadow / --dark, which
+   doubled as surface colours. That works in one theme only: in dark mode the
+   "white" highlight has to stay lighter than the chrome it sits on, while the
+   surface behind text has to go darker. Splitting them means every .window,
+   .button and chip inverts correctly with no per-component dark rules.
+   ========================================================================== */
+
+:root {
+  /* Surfaces */
+  --face:     #D4D0C8;  /* window chrome / button faces */
+  --surface:  #FFFFFF;  /* the sunken area that holds content */
+
+  /* Bevel ramp: 1 = brightest highlight ... 4 = deepest shadow */
+  --bevel-1:  #FFFFFF;
+  --bevel-2:  #DFDFDF;
+  --bevel-3:  #808080;
+  --bevel-4:  #0A0A0A;
+
+  /* Title bars */
+  --title-1:  #0A246A;
+  --title-2:  #3A6EA5;
+  --title-off:#6E6E6E;
+  --title-ink:#FFFFFF;
+
+  /* Desktop wallpaper */
+  --chrome-1: #B9C2CC;
+  --chrome-2: #E3E9EF;
+  --chrome-3: #9AA7B4;
+
+  /* Text */
+  --ink:      #000000;
+  --ink-soft: #3B3B3B;
+  --link:     #000080;
+  /* Small solid fills (progress bar, icon badges) that need to stay visible
+     against --surface. The title-bar colours are too dark for that in dark
+     mode, so this is a separate token rather than a reuse of --title-1. */
+  --accent:   #0A246A;
+  --error:    #A00000;
+  --ok:       #0A5D2A;
+  --icon-ink: #111111;  /* pixel-art icon fills that must invert */
+
+  /* The chrome-lettering gradient used by the h1 on the home screen */
+  --lettering:
+    linear-gradient(180deg,
+      #ffffff 0%, #dbe3ea 28%, #8a97a6 50%,
+      #6f7d8c 54%, #c3ccd6 74%, #ffffff 100%);
+
+  --font: Tahoma, "MS Sans Serif", Verdana, Geneva, sans-serif;
+  --font-mono: "Courier New", Courier, monospace;
+
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+
+  --page: 1000px;
+  --speed: 0.18s;
+  --taskbar-h: 48px;
+}
+
+/* Dark "midnight" scheme: same chrome, inverted bevel ramp.
+   Applied by App.jsx as data-theme="dark" on <html>. */
+:root[data-theme="dark"] {
+  --face:     #3A3A3A;
+  --surface:  #1C1C1C;
+
+  --bevel-1:  #6E6E6E;
+  --bevel-2:  #565656;
+  --bevel-3:  #1A1A1A;
+  --bevel-4:  #000000;
+
+  /* Same steel-blue family as the light theme's #0A246A -> #3A6EA5, just
+     darkened. A violet title bar read as a different product entirely. */
+  --title-1:  #13293D;
+  --title-2:  #2E5C8A;
+  --title-off:#4A4A4A;
+  --title-ink:#FFFFFF;
+
+  --chrome-1: #1F242B;
+  --chrome-2: #2B323B;
+  --chrome-3: #171B21;
+
+  --ink:      #EDEDED;
+  --ink-soft: #C2C2C2;
+  --link:     #7FC4FF;
+  --accent:   #5B9BD5;
+  --error:    #FF9C9C;
+  --ok:       #7BE0A4;
+  --icon-ink: #E8E8E8;
+
+  --lettering:
+    linear-gradient(180deg,
+      #ffffff 0%, #e8edf2 28%, #b6c2d0 50%,
+      #a9b6c4 54%, #d8e0e8 74%, #ffffff 100%);
+}
+
+/* The two bevels every raised / sunken surface in the site is built from. */
+:root {
+  --bevel-out:
+    inset  1px  1px 0 var(--bevel-1),
+    inset -1px -1px 0 var(--bevel-4),
+    inset  2px  2px 0 var(--bevel-2),
+    inset -2px -2px 0 var(--bevel-3);
+  --bevel-in:
+    inset  1px  1px 0 var(--bevel-3),
+    inset -1px -1px 0 var(--bevel-1),
+    inset  2px  2px 0 var(--bevel-4),
+    inset -2px -2px 0 var(--bevel-2);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px, transparent 3px),
+    linear-gradient(160deg, var(--chrome-1) 0%, var(--chrome-2) 46%, var(--chrome-3) 100%);
+  background-attachment: fixed;
+  padding-top: var(--taskbar-h);
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-weight: bold;
+  line-height: 1.15;
+}
+
+/* Each routed page is its own document, so each one owns a single <h1>
+   and steps down from there: h1 page title, h2 section, h3 sub-section. */
+h1 { font-size: 1.75rem; margin-bottom: var(--space-1); }
+h2 { font-size: 1.25rem; margin-bottom: var(--space-1); }
+h3 { font-size: 1.0625rem; margin-bottom: var(--space-1); }
+h4 { font-size: 0.9375rem; margin-bottom: var(--space-1); }
+
+a { color: var(--link); }
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul { list-style: none; }
+
+/* Components use the `hidden` attribute to collapse the nav on mobile;
+   without this, a display rule elsewhere would override it. */
+[hidden] { display: none !important; }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px dotted var(--ink);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--space-2);
+  z-index: 200;
+  padding: var(--space-1) var(--space-2);
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+  color: var(--ink);
+  text-decoration: none;
+  transition: top var(--speed) ease;
+}
+
+.skip-link:focus {
+  top: var(--space-2);
+}
+
+/* --------------------------------------------------------------------------
+   Shared primitives, used by more than one component, so they live here
+   rather than in any single component's stylesheet.
+   -------------------------------------------------------------------------- */
+
+/* Raised pill list: Skills page groups, About interests. */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-bottom: var(--space-2);
+}
+
+.chips li {
+  padding: 3px 12px;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+  font-size: 0.875rem;
+}
+
+/* Sunken monospace tag list: tech stack on cards and on the detail page. */
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: var(--space-1);
+}
+
+.stack li {
+  padding: 1px 7px;
+  background: var(--surface);
+  box-shadow: var(--bevel-in);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+/* Raised card used by projects, extra-curriculars and detail panels. */
+.panel {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-3);
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+}
+
+.panel p { margin-bottom: var(--space-2); }
+.panel p:last-child { margin-bottom: 0; }
+
+/* Label / value rows: About factsheet, project detail metadata. */
+.factsheet__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-1) 0;
+  border-bottom: 1px solid var(--bevel-2);
+}
+
+.factsheet dt {
+  flex: 0 0 8rem;
+  font-weight: bold;
+}
+
+.factsheet dd { flex: 1 1 12rem; }
+
+/* Win95 push button. */
+.button {
+  display: inline-block;
+  font-family: var(--font);
+  font-size: 0.9375rem;
+  font-weight: bold;
+  color: var(--ink);
+  background: var(--face);
+  border: none;
+  box-shadow: var(--bevel-out);
+  padding: 6px 22px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--speed) ease;
+}
+
+.button:hover { background: var(--bevel-2); }
+
+/* Pressing it flips the bevel, so the button actually goes in. */
+.button:active {
+  box-shadow: var(--bevel-in);
+  padding: 7px 21px 5px 23px;
+}
+
+@media (max-width: 480px) {
+  .factsheet dt { flex-basis: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

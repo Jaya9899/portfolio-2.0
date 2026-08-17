@@ -1,0 +1,67 @@
+.loader {
+  max-width: 26rem;
+  margin: var(--space-5) auto;
+  padding: 3px;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+}
+
+.loader__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: 4px 6px;
+  background: linear-gradient(90deg, var(--title-1), var(--title-2));
+  color: var(--title-ink);
+  font-size: 0.8125rem;
+  font-weight: bold;
+}
+
+.loader__path { font-family: var(--font-mono); }
+.loader__buttons { letter-spacing: 0.15em; }
+
+.loader__body {
+  padding: var(--space-3);
+  background: var(--face);
+}
+
+.loader__label {
+  margin-bottom: var(--space-2);
+  font-size: 0.875rem;
+}
+
+/* Sunken trough with a marching block fill, the way a Win95 progress
+   control looked before it learned about gradients. */
+.loader__track {
+  display: block;
+  height: 20px;
+  padding: 2px;
+  background: var(--surface);
+  box-shadow: var(--bevel-in);
+  overflow: hidden;
+}
+
+.loader__fill {
+  display: block;
+  height: 100%;
+  width: 40%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--accent) 0, var(--accent) 10px,
+    transparent 10px, transparent 13px
+  );
+  animation: loader-march 1s linear infinite;
+}
+
+@keyframes loader-march {
+  from { transform: translateX(-40%); }
+  to   { transform: translateX(250%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader__fill {
+    width: 100%;
+    animation: none;
+  }
+}

@@ -1,0 +1,53 @@
+.window {
+  max-width: var(--page);
+  margin: 0 auto var(--space-4);
+  padding: 3px;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+}
+
+.window__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: 4px 6px;
+  background: linear-gradient(90deg, var(--title-1), var(--title-2));
+  color: var(--title-ink);
+  font-size: 0.8125rem;
+  font-weight: bold;
+}
+
+.window__path {
+  font-family: var(--font-mono);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.window__buttons {
+  letter-spacing: 0.15em;
+  flex: 0 0 auto;
+}
+
+.window__body {
+  padding: var(--space-4) var(--space-3);
+  background: var(--surface);
+  box-shadow: var(--bevel-in);
+}
+
+/* Below the desktop width the window would otherwise run edge to edge, which
+   loses the "a window sitting on a desktop" read the whole design depends on.
+   A small gutter keeps the wallpaper visible either side. */
+@media (max-width: 1024px) {
+  .window {
+    margin-left: var(--space-1);
+    margin-right: var(--space-1);
+  }
+}
+
+@media (max-width: 768px) {
+  .window__body {
+    padding: var(--space-3) var(--space-2);
+  }
+}

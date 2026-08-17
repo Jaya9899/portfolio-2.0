@@ -1,0 +1,132 @@
+/* The pinned taskbar. Flexbox, as in Assignment 1: one row, three groups. */
+.taskbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 4px 6px;
+  min-height: var(--taskbar-h);
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+}
+
+.taskbar__start {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  padding: 5px 14px;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+  font-family: var(--font);
+  font-size: 0.8125rem;
+  font-weight: bold;
+  color: var(--ink);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.taskbar__start:hover { background: var(--bevel-2); }
+.taskbar__start:active { box-shadow: var(--bevel-in); }
+.taskbar__start[aria-expanded="true"] { box-shadow: var(--bevel-in); }
+
+.taskbar__start-glyph { font-size: 0.875rem; }
+
+.taskbar__nav {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.taskbar__list {
+  display: flex;
+  gap: 4px;
+}
+
+.taskbar__link {
+  display: block;
+  white-space: nowrap;
+  padding: 5px 12px;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+  font-size: 0.8125rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.taskbar__link:hover { background: var(--bevel-2); }
+.taskbar__link:active { box-shadow: var(--bevel-in); }
+
+/* The route you are on reads as a pressed taskbar button. */
+.taskbar__link--active {
+  box-shadow: var(--bevel-in);
+  background: var(--bevel-2);
+  font-weight: bold;
+}
+
+.taskbar__theme {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  margin-left: auto;
+  padding: 5px 12px;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+  border: none;
+  font-family: var(--font);
+  font-size: 0.8125rem;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.taskbar__theme:hover { background: var(--bevel-2); }
+.taskbar__theme:active { box-shadow: var(--bevel-in); }
+
+.taskbar__theme-glyph {
+  font-size: 0.9375rem;
+  line-height: 1;
+}
+
+/* --- Tablet and below: the links collapse into a Start menu ------------- */
+@media (max-width: 768px) {
+  .taskbar__nav--menu {
+    position: absolute;
+    top: 100%;
+    left: 6px;
+    z-index: 110;
+    flex: 0 0 auto;
+    width: min(15rem, calc(100vw - 12px));
+    padding: 3px;
+    background: var(--face);
+    box-shadow: var(--bevel-out);
+    overflow-x: visible;
+  }
+
+  .taskbar__nav--menu .taskbar__list {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .taskbar__nav--menu .taskbar__link {
+    padding: 9px 12px;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .taskbar__theme-label {
+    /* Keep the glyph only. The accessible name still says what it does. */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}

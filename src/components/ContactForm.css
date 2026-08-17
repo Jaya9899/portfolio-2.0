@@ -1,0 +1,130 @@
+.contact__form fieldset {
+  border: none;
+  padding: var(--space-3);
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+}
+
+.contact__legend {
+  padding: 0 var(--space-1);
+  font-size: 0.8125rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.field {
+  margin-bottom: var(--space-2);
+}
+
+.field label {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 0.875rem;
+}
+
+.field input[type="text"],
+.field input[type="email"],
+.field select,
+.field textarea {
+  width: 100%;
+  font-family: var(--font);
+  font-size: 0.9375rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: none;
+  box-shadow: var(--bevel-in);
+  padding: 5px 7px;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+/* An invalid field gets a red rule along its bottom edge. Colour is not the
+   only signal, the message below says what is wrong.
+   The red shadow is listed first on purpose: box-shadow paints the first
+   layer on top, and --bevel-in's own -2px inset would otherwise cover it. */
+.field [aria-invalid="true"] {
+  box-shadow: inset 0 -3px 0 var(--error), var(--bevel-in);
+}
+
+.field__error {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.8125rem;
+  font-weight: bold;
+  color: var(--error);
+}
+
+.field__error::before {
+  content: "! ";
+}
+
+.field__count {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--ink-soft);
+}
+
+/* --- Confirmation message box ------------------------------------------ */
+.dialog {
+  margin-top: var(--space-3);
+  padding: 3px;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+}
+
+.dialog__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: 3px 4px 3px 6px;
+  background: linear-gradient(90deg, var(--title-1), var(--title-2));
+  color: var(--title-ink);
+  font-size: 0.8125rem;
+  font-weight: bold;
+}
+
+.dialog__close {
+  width: 20px;
+  height: 18px;
+  padding: 0;
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+  border: none;
+  font-family: var(--font);
+  font-size: 0.8125rem;
+  font-weight: bold;
+  line-height: 1;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.dialog__close:active { box-shadow: var(--bevel-in); }
+
+.dialog__body {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  font-size: 0.875rem;
+}
+
+.dialog__icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--title-ink);
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+  font-size: 1.375rem;
+  font-weight: bold;
+}

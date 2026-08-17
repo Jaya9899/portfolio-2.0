@@ -1,0 +1,92 @@
+/* Full-bleed bar pinned to the bottom of the page, the mirror of the taskbar
+   at the top, which is where the real Windows taskbar lived anyway.
+
+   It spans the whole viewport width (no max-width, no margin) so it reads as
+   page furniture rather than another floating window. The content inside is
+   still constrained to --page so it lines up with the windows above it.
+
+   It sits at the bottom because .layout is a flex column with min-height and
+   .layout__main takes flex: 1, so on a short page the main area grows and pushes
+   this down, without any position: fixed. */
+.site-footer {
+  width: 100%;
+  margin-top: var(--space-2);
+  background: var(--face);
+  box-shadow: var(--bevel-out);
+  font-size: 0.8125rem;
+}
+
+/* --- Upper row: the two link groups ------------------------------------ */
+.site-footer__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-3);
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 7px var(--space-2);
+}
+
+.site-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+}
+
+/* Middot separators between the inline links. */
+.site-footer__links li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.site-footer__links li:not(:last-child)::after {
+  content: "·";
+  color: var(--ink-soft);
+}
+
+.site-footer__links--elsewhere {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+/* --- Lower strip: the Win95 status bar ---------------------------------- */
+.site-footer__status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 0 3px 3px;
+}
+
+.site-footer__status p {
+  padding: 3px 8px;
+  box-shadow: var(--bevel-in);
+}
+
+.site-footer__note {
+  flex: 1 1 auto;
+  color: var(--ink-soft);
+}
+
+.site-footer__clock {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  min-width: 5.5rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .site-footer__bar {
+    justify-content: flex-start;
+    gap: var(--space-1) var(--space-2);
+  }
+}
+
+@media (max-width: 480px) {
+  .site-footer__status p { flex: 1 1 100%; }
+}

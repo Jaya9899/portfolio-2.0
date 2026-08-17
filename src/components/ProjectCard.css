@@ -1,0 +1,28 @@
+.project__title {
+  margin-bottom: 2px;
+}
+
+.project__tagline {
+  margin-bottom: var(--space-2);
+  font-size: 0.8125rem;
+  font-weight: bold;
+  color: var(--ink-soft);
+}
+
+.project__summary {
+  margin-bottom: var(--space-2);
+}
+
+.project__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  margin-bottom: 0;
+  font-size: 0.875rem;
+}
+
+.project__more {
+  font-size: 0.8125rem;
+  padding: 5px 18px;
+}
