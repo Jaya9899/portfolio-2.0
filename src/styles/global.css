@@ -8,7 +8,7 @@
    doubled as surface colours. That works in one theme only: in dark mode the
    "white" highlight has to stay lighter than the chrome it sits on, while the
    surface behind text has to go darker. Splitting them means every .window,
-   .button and chip inverts correctly with no per-component dark rules.
+   .button and .stack tag inverts correctly with no per-component dark rules.
    ========================================================================== */
 
 :root {
@@ -192,21 +192,6 @@ textarea:focus-visible {
    Shared primitives, used by more than one component, so they live here
    rather than in any single component's stylesheet.
    -------------------------------------------------------------------------- */
-
-/* Raised pill list: Skills page groups, About interests. */
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1);
-  margin-bottom: var(--space-2);
-}
-
-.chips li {
-  padding: 3px 12px;
-  background: var(--face);
-  box-shadow: var(--bevel-out);
-  font-size: 0.875rem;
-}
 
 /* Sunken monospace tag list: tech stack on cards and on the detail page. */
 .stack {

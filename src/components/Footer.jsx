@@ -12,10 +12,6 @@ function formatClock(date) {
 export default function Footer({ isMobile }) {
   const [clock, setClock] = useState(() => formatClock(new Date()));
 
-  /* Effect 7: the status-bar clock, in the spirit of the Windows tray.
-     CLEANUP: clearInterval on unmount. An interval is the easiest thing in
-     React to leak, since it keeps firing after the component is gone and calls
-     setState on an unmounted tree, so the teardown is not optional. */
   useEffect(() => {
     const timerId = window.setInterval(() => {
       setClock(formatClock(new Date()));

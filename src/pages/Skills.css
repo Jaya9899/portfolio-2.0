@@ -1,7 +1,46 @@
-.skills__group {
-  margin-top: var(--space-3);
+/* Skills is the one window that holds a file rather than a document: the title
+   bar says C:\jaya\skills.ini, so the body is typeset as that file's contents.
+   Each group becomes a [Section] header with its items as the value below it.
+
+   This replaced a row of raised chips. Chips were built from --bevel-out, the
+   same raised bevel as .button, so every skill looked like a push button and
+   invited a click that never did anything. Flat text carries no affordance to
+   mislead, and the window__body it sits on is already the sunken client area,
+   so the readout needs no box of its own. */
+
+.ini {
+  max-width: 68ch;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.7;
 }
 
-.skills__group:first-of-type {
-  margin-top: 0;
+.ini__section + .ini__section {
+  margin-top: var(--space-2);
+}
+
+/* Undo the global h2 ramp. Inside a text file a section name is one more line
+   of monospace; the brackets and weight separate it, not a jump to 1.25rem. */
+.ini__key {
+  margin-bottom: 0;
+  font-family: inherit;
+  font-size: 0.9375rem;
+}
+
+/* Dimmed like the punctuation an editor would grey out, so the eye lands on
+   the section name instead of the syntax around it. */
+.ini__bracket {
+  color: var(--ink-soft);
+  font-weight: normal;
+}
+
+/* The items run inline as one comma-separated value but stay a real <ul>, so
+   a screen reader still announces four items rather than one long string. */
+.ini__values li {
+  display: inline;
+}
+
+.ini__values li:not(:last-child)::after {
+  content: ',\00a0';
+  color: var(--ink-soft);
 }
